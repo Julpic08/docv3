@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le monde de julpic! &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Le monde de julpic!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="le-monde-de-julpic">
+<h1>Le monde de julpic!<a class="headerlink" href="#le-monde-de-julpic" title="Link to this heading"></a></h1>
+<p>Network Attack Simulator (NASim) is a lightweight, high-level network attack simulator written in python. It is designed to be used for rapid testing of autonomous pen-testing agents using reinforcement learning and planning. It is a simulator by definition so does not replicate all details of attacking a real system but it instead aims to capture some of the more salient features of network pen-testing such as the large and changing sizes of the state and action spaces, partial observability and varied network topology.</p>
+<p>The environment is modelled after the <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium/">gymnasium (formerly Open AI gym)</a> interface.</p>
+<section id="what-s-new">
+<h2>What’s new<a class="headerlink" href="#what-s-new" title="Link to this heading"></a></h2>
+<section id="version-0-12-0">
+<h3>Version 0.12.0<a class="headerlink" href="#version-0-12-0" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Renamed <cite>NASimEnv.get_minimum_actions -&gt; NASimEnv.get_minumum_hops</cite> to better reflect what it does (thanks &#64;rzvnbr for the suggestion).</p></li>
+</ul>
+</section>
+<section id="version-0-11-0">
+<h3>Version 0.11.0<a class="headerlink" href="#version-0-11-0" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Migrated to <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium/">gymnasium (formerly Open AI gym)</a> fromOpen AI gym (thanks &#64;rzvnbr for the suggestion).</p></li>
+<li><p>Fixed bug with action string representation (thanks &#64;rzvnbr for the bug report)</p></li>
+<li><p>Added “sim to real considerations” explanation document to the docs (thanks &#64;Tudyx for the suggestion)</p></li>
+</ul>
+</section>
+<section id="version-0-10-1">
+<h3>Version 0.10.1<a class="headerlink" href="#version-0-10-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed bug for host based actions (thanks &#64;nguyen-thanh20 for the bug report)</p></li>
+</ul>
+</section>
+<section id="version-0-10-0">
+<h3>Version 0.10.0<a class="headerlink" href="#version-0-10-0" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed typos (thanks &#64;francescoluciano)</p></li>
+<li><p>Updates to be compatible with latest version of OpenAI gym API (v0.25) (see <a class="reference external" href="https://www.gymlibrary.ml/content/api/">Open AI gym API docs</a> for details), notable changes include</p>
+<ul>
+<li><p>Updated naming convention when initializing environments using the <code class="docutils literal notranslate"><span class="pre">gym.make</span></code> API (see <a class="reference external" href="https://networkattacksimulator.readthedocs.io/en/latest/tutorials/gym_load.html">gym load docs</a> for details.)</p></li>
+<li><p>Updated reset function to match new gym API (shouldn’t break any implementations using old API)</p></li>
+<li><p>Updated step function to match new gym API. It now returns two bools, the first specifies if terminal/goal state has been reached and the other specifies if the episode is terminated due to the scenario step limit (if any exists) has been reached. This change may break implementations and you may need to specify (or not) when initializing the gym environment using <code class="docutils literal notranslate"><span class="pre">gym.make(env_id,</span> <span class="pre">new_step_api=True)</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="version-0-9-1">
+<h3>Version 0.9.1<a class="headerlink" href="#version-0-9-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed a few bugs and added some tests (thanks &#64;simonsays1980 for the bug reports)</p></li>
+</ul>
+</section>
+<section id="version-0-9-0">
+<h3>Version 0.9.0<a class="headerlink" href="#version-0-9-0" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The value of a host is now observed when any level of access is gained on a host. This makes it so that agents can learn to decide whether to invest time in gaining root access on a host or not, depending on the host’s value (thanks &#64;jaromiru for the proposal).</p></li>
+<li><p>Initial observation of reachable hosts now contains the host’s address (thanks &#64;jaromiru).</p></li>
+<li><p>Added some support for custom address space bounds in when using scenario generator (thanks &#64;jaromiru for the suggestion).</p></li>
+</ul>
+</section>
+<section id="version-0-8-0">
+<h3>Version 0.8.0<a class="headerlink" href="#version-0-8-0" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added option of specifying a ‘value’ for each host when defining a custom network using the .YAML format (thanks &#64;Joe-zsc for the suggestion).</p></li>
+<li><p>Added the ‘small-honeypot’ scenario to included scenarios.</p></li>
+</ul>
+</section>
+<section id="version-0-7-5">
+<h3>Version 0.7.5<a class="headerlink" href="#version-0-7-5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added ‘undefined error’ to observation to fix issue with initial and later observations being indistinguishable.</p></li>
+</ul>
+</section>
+<section id="version-0-7-4">
+<h3>Version 0.7.4<a class="headerlink" href="#version-0-7-4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed issues with incorrect observation of host ‘value’ and ‘discovery_value’. Now, when in partially observable mode, the agent will correctly only observe these values on the step that they are recieved</p></li>
+<li><p>Some other minor code formatting fixes</p></li>
+</ul>
+</section>
+<section id="version-0-7-3">
+<h3>Version 0.7.3<a class="headerlink" href="#version-0-7-3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed issue with scenario YAML files not being included with PyPi package</p></li>
+<li><p>Added final policy visualisation option to DQN and Q-Learning agents</p></li>
+</ul>
+</section>
+<section id="version-0-7-2">
+<h3>Version 0.7.2<a class="headerlink" href="#version-0-7-2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed bug with ‘re-registering’ Gym environments when reloading modules</p></li>
+<li><p>Added example implementations of Tabular Q-Learning: <cite>agents/ql_agent.py</cite> and <cite>agents/ql_replay.py</cite></p></li>
+<li><p>Added <cite>Agents</cite> section to docs, along with other minor doc updates</p></li>
+</ul>
+</section>
+<section id="version-0-7-1">
+<h3>Version 0.7.1<a class="headerlink" href="#version-0-7-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added some scripts for running random benchmarks and describing benchmark scenarios</p></li>
+<li><p>Added some more docs (including for creating custom scenarios) and updated other docs</p></li>
+</ul>
+</section>
+<section id="version-0-7">
+<h3>Version 0.7<a class="headerlink" href="#version-0-7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Implemented host based firewalls</p></li>
+<li><p>Added priviledge escalation</p></li>
+<li><p>Added a demo script, including a pre-trained agent for the ‘tiny’ scenario</p></li>
+<li><p>Fix to upper bound calculation (factored in reward for discovering a host)</p></li>
+</ul>
+</section>
+<section id="version-0-6">
+<h3>Version 0.6<a class="headerlink" href="#version-0-6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Implemented compatibility with gym.make()</p></li>
+<li><p>Updated docs for loading and interactive with NASimEnv</p></li>
+<li><p>Added extra functions to nasim.scenarios to make it easier to load scenarios seperately to a NASimEnv</p></li>
+<li><p>Fixed bug to do with class attributes and creating different scenarios in same python session</p></li>
+<li><p>Fixed up bruteforce agent and tests</p></li>
+</ul>
+</section>
+<section id="version-0-5">
+<h3>Version 0.5<a class="headerlink" href="#version-0-5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>First official release on PyPi</p></li>
+<li><p>Cleaned up dependencies, setup.py, etc and some small fixes</p></li>
+<li><p>First stable version</p></li>
+</ul>
+</section>
+</section>
+<section id="the-docs">
+<h2>The Docs<a class="headerlink" href="#the-docs" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/loading.html">Starting a NASim Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/gym_load.html">Starting NASim using OpenAI gym</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/environment.html">Interacting with NASim Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/scenarios.html">Understanding Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/creating_scenarios.html">Creating Custom Scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/load.html">NASimEnv load reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/agents/index.html">Agents Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/envs/index.html">Environment Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/scenarios/index.html">Scenario Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="explanations/index.html">Explanations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="explanations/scenario_generation.html">Scenario Generation Explanation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explanations/sim_to_real.html">Sim-to-Real Gap Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="community/index.html">Community &amp; Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="community/development.html">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/license.html">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/contact.html">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="community/distributing.html">Distribution</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="how-should-i-cite-nasim">
+<h2>How should I cite NASim?<a class="headerlink" href="#how-should-i-cite-nasim" title="Link to this heading"></a></h2>
+<p>Please cite NASim in your publications if you use it in your research. Here is an example BibTeX entry:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>@misc<span class="o">{</span>schwartz2019nasim,
+<span class="nv">title</span><span class="o">={</span>NASim:<span class="w"> </span>NJP<span class="o">}</span>,
+<span class="nv">author</span><span class="o">={</span>Schwartz,<span class="w"> </span>Jonathon<span class="w"> </span>and<span class="w"> </span>Kurniawatti,<span class="w"> </span>Hanna<span class="o">}</span>,
+<span class="nv">year</span><span class="o">={</span><span class="m">2019</span><span class="o">}</span>,
+<span class="nv">howpublished</span><span class="o">={</span><span class="se">\u</span>rl<span class="o">{</span>https://Julpic08.readthedocs.io/<span class="o">}}</span>,
+<span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorials/index.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

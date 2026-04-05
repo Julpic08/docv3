@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating Custom Scenarios &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Reference" href="../reference/index.html" />
+    <link rel="prev" title="Understanding Scenarios" href="scenarios.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Starting a NASim Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gym_load.html">Starting NASim using OpenAI gym</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Interacting with NASim Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenarios.html">Understanding Scenarios</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Creating Custom Scenarios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-a-custom-scenario-using-yaml">Defining a custom scenario using YAML</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-the-network">Defining the network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-the-pen-tester">Defining the pen-tester</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-custom-yaml-scenario">Running a custom YAML scenario</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Creating Custom Scenarios</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/creating_scenarios.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="creating-custom-scenarios">
+<span id="creating-scenarios-tute"></span><h1>Creating Custom Scenarios<a class="headerlink" href="#creating-custom-scenarios" title="Link to this heading"></a></h1>
+<p>With NASim it is possible to use custom scenarios defined in a valid YAML file. In this tutorial we will cover how to create and run you own custom scenario.</p>
+<section id="defining-a-custom-scenario-using-yaml">
+<span id="defining-custom-yaml"></span><h2>Defining a custom scenario using YAML<a class="headerlink" href="#defining-a-custom-scenario-using-yaml" title="Link to this heading"></a></h2>
+<p>Before we dive into writing a new custom YAML scenario it is worth having a look at some examples. NASim comes with a number of benchmark YAML scenarios which can be found in the <code class="docutils literal notranslate"><span class="pre">nasim/scenarios/benchmark</span></code> directory (or view on github <a class="reference external" href="https://github.com/Jjschwartz/NetworkAttackSimulator/tree/master/nasim/scenarios/benchmark">here</a>). For this tutorial we will be using the <code class="docutils literal notranslate"><span class="pre">tiny.yaml</span></code> scenario as an example.</p>
+<p>A custom scenarios in NASim requires definining components: the network and the pen-tester.</p>
+<section id="defining-the-network">
+<h3>Defining the network<a class="headerlink" href="#defining-the-network" title="Link to this heading"></a></h3>
+<p>The network is defined by the following sections:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>subnets</strong>: size of each subnet in network</p></li>
+<li><p><strong>topology</strong>: an adjacency matrix defining which subnets are connected</p></li>
+<li><p><strong>os</strong>: names of available operating systems on network</p></li>
+<li><p><strong>services</strong>: names of available services on network</p></li>
+<li><p><strong>processes</strong>: names of available processes on network</p></li>
+<li><p><strong>hosts</strong>: a dictionary of hosts on the network and their configurations</p></li>
+<li><p><strong>firewall</strong>: definition of the subnet firewalls</p></li>
+</ol>
+</div></blockquote>
+<section id="subnets">
+<h4>Subnets<a class="headerlink" href="#subnets" title="Link to this heading"></a></h4>
+<p>This property defines the number of subnets on the network and the size of each. It is simply defined as an ordered list of integers. The address of the first subnet in the list is <em>1</em>, the second subnet is <em>2</em>, and so on. The address of <em>0</em> is reserved for the “internet” subnet (see topology section below). For example, the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> network contains 3 subnets all of size 1:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">subnets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">]</span>
+
+<span class="c1"># or alternatively</span>
+
+<span class="nt">subnets</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</section>
+<section id="topology">
+<h4>Topology<a class="headerlink" href="#topology" title="Link to this heading"></a></h4>
+<p>The topology is defined by an adjacency matrix with a row and column for every subnet in the network along with an additional row and column designating the “internet” subnet, i.e. connection to outside of the network. The first row and column is reserved for the “internet” subnet. A connection between subnets is indicated with a <code class="docutils literal notranslate"><span class="pre">1</span></code> while not connection is indicated with a <code class="docutils literal notranslate"><span class="pre">0</span></code>. Note that we assume that connections are symmetric and that a subnet is connected with itself.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> network, subnet <em>1</em> is a public subnet so is connected to the internet, indicated by a <code class="docutils literal notranslate"><span class="pre">1</span></code> in row 1, column 2 and row 2, column 1. Subnet <em>1</em> is also connected with subnets <em>2</em> and <em>3</em>, indicated by <code class="docutils literal notranslate"><span class="pre">1</span></code> in relevant cells, meanwhile subnets <em>2</em> and <em>3</em> are private and not connected directly to the internet, indicated by the <code class="docutils literal notranslate"><span class="pre">0</span></code> values.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">topology</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">],</span>
+<span class="w">           </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">],</span>
+<span class="w">           </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">],</span>
+<span class="w">           </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">]]</span>
+</pre></div>
+</div>
+</section>
+<section id="os-services-processes">
+<h4>OS, services, processes<a class="headerlink" href="#os-services-processes" title="Link to this heading"></a></h4>
+<p>Similar to how we defined the subnet list, the <strong>os</strong>, <strong>services</strong> and <strong>processes</strong> are defined by a simple list. The names of any of the items in each list can be anything, but note that they will be used for validating the host configurations, exploits, etc, so just need to match-up with those values as desired.</p>
+<p>Continuing our example, the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> scenario includes one OS: <em>linux</em>, one service: <em>ssh</em>, and one process: <em>tomcat</em>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">os</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssh</span>
+<span class="nt">processes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tomcat</span>
+</pre></div>
+</div>
+</section>
+<section id="host-configurations">
+<h4>Host Configurations<a class="headerlink" href="#host-configurations" title="Link to this heading"></a></h4>
+<p>The host configuration section is a mapping from host address to their configuration, where the address is a <code class="docutils literal notranslate"><span class="pre">(subnet</span> <span class="pre">number,</span> <span class="pre">host</span> <span class="pre">number)</span></code> tuple and the configuration must include the hosts OS, services running, processes running, and optional host firewall settings.</p>
+<p>There are a few things to note when defining a host:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The number of hosts defined for each subnet needs to match the size of each subnet</p></li>
+<li><p>Host addresses within a subnet must start from <code class="docutils literal notranslate"><span class="pre">0</span></code> and count up from there (i.e. three hosts in subnet <em>1</em> would have addresses <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0)</span></code>, <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code>, and <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code>)</p></li>
+<li><p>The names of any OS, service, and process must match values provided in the <strong>os</strong>, <strong>services</strong> and <strong>processes</strong> sections of the YAML file.</p></li>
+<li><p>Each host must have an OS and at least one service running. It is okay for hosts to have no processes running (which can be indicated using an empty list <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
+</ol>
+</div></blockquote>
+<p><strong>Host firewalls</strong> are defined as a mapping from host address to the list of services to deny from that host. Host addresses must be a valid address of a host in the network and any services must also match services defined in the services section. Finally, if a host address is not part of the firewall then it is assumed all traffic is allowed from that host, at the host level (it may still be blocked by subnet firewall).</p>
+<p><strong>Host Value</strong> is the optional value the agent will recieve when compromising the host. Unlike for the <em>sensitive_hosts</em> section this value can be negative as well as zero and positive. This makes it possible to set additional host specific rewards or penalties, for example setting a negative reward for a ‘honeypot’ host on the network. A couple of things to note:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Host value is optional and will default to 0.</p></li>
+<li><p>For any <em>sensitive hosts</em> the value must either not be specified or it must match the value specified in the <em>sensitive_hosts</em> section of the file.</p></li>
+<li><p>Same as for <em>sensitive hosts</em>,  agent will only recieve the value as a reward when they compromise the host.</p></li>
+</ol>
+</div></blockquote>
+<p>Here is the example host configurations section for the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> scenario, where a host firewall and is defined only for host <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0)</span></code> and the host <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">0)</span></code> has a value of <code class="docutils literal notranslate"><span class="pre">0</span></code> (noting we could leave value unspecified in this case for the same result, we include it here as an example):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">host_configurations</span><span class="p">:</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(1, 0)</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux</span>
+<span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">processes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">tomcat</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="c1"># which services to deny between individual hosts</span>
+<span class="w">    </span><span class="nt">firewall</span><span class="p">:</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(3, 0)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(2, 0)</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux</span>
+<span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">processes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">tomcat</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">firewall</span><span class="p">:</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(1, 0)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(3, 0)</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux</span>
+<span class="w">    </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">processes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">tomcat</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="firewall">
+<h4>Firewall<a class="headerlink" href="#firewall" title="Link to this heading"></a></h4>
+<p>The final section for defining the network is the firewall, which is defined as a mapping from <code class="docutils literal notranslate"><span class="pre">(subnet</span> <span class="pre">number,</span> <span class="pre">subnet</span> <span class="pre">number)</span></code> tuples to list of services to allow. Some things to note about defining firewalls:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>A firewall rule can only be defined between subnets that are connected in the topology adjacency matrix.</p></li>
+<li><p>Each rule defines which services are allowed in a single direction, from the first subnet in the tuple to the second subnet in the tuple (i.e. (source subnet, destination subnet))</p></li>
+<li><p>An empty list means all traffic will be blocked from source to destination</p></li>
+</ol>
+</div></blockquote>
+<p>Here is the firewall definition for the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> scenario where SSH traffic is allowed between all subnets, except from subnet 1 to 0 and from 1 to 2.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># two rows for each connection between subnets as defined by topology</span>
+<span class="c1"># one for each direction of connection</span>
+<span class="c1"># lists which services to allow</span>
+<span class="nt">firewall</span><span class="p">:</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(0, 1)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(1, 0)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(1, 2)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(2, 1)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(1, 3)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(3, 1)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(2, 3)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(3, 2)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ssh</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>And with that we have covered everything needed to define the scenario’s network. Next up is defining the pen-tester.</p>
+</section>
+</section>
+<section id="defining-the-pen-tester">
+<h3>Defining the pen-tester<a class="headerlink" href="#defining-the-pen-tester" title="Link to this heading"></a></h3>
+<p>The pen-tester is defined by these sections:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>sensitive_hosts</strong>: a dictionary containing the address of sensitive/target hosts and their value</p></li>
+<li><p><strong>exploits</strong>: a dictionary of exploits</p></li>
+<li><p><strong>privilege_escalation</strong>: a dictionary of privilege escalation actions</p></li>
+<li><p><strong>os_scan_cost</strong>: cost of using OS scan</p></li>
+<li><p><strong>service_scan_cost</strong>: cost of using service scan</p></li>
+<li><p><strong>process_scan_cost</strong>: cost of using process scan</p></li>
+<li><p><strong>subnet_scan_cost</strong>: cost of using subnet scan</p></li>
+<li><p><strong>step_limit</strong>: the maximum number of actions pen-tester can perform in a single episode</p></li>
+</ol>
+</div></blockquote>
+<section id="sensitive-hosts">
+<h4>Sensitive hosts<a class="headerlink" href="#sensitive-hosts" title="Link to this heading"></a></h4>
+<p>This section specifies the addresses and values of the target hosts in the network. When the pen-tester gains root access on these hosts they will recieve the specified value as a reward. The <em>sensitive_hosts</em> section is a dictionary where the entries are address, value pairs. Where the address is a <code class="docutils literal notranslate"><span class="pre">(subnet</span> <span class="pre">number,</span> <span class="pre">host</span> <span class="pre">number)</span></code> tuple and the value is a non-negative float or integer.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> scenario the pen-tester is aiming to get root access on the hosts <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">0)</span></code> and <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">0)</span></code>, both of which have a value of 100:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">sensitive_hosts</span><span class="p">:</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(2, 0)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(3, 0)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</pre></div>
+</div>
+</section>
+<section id="exploits">
+<h4>Exploits<a class="headerlink" href="#exploits" title="Link to this heading"></a></h4>
+<p>The exploits section is a dictionary which maps exploit names to exploit definitions. Every scenario requires at least on exploit. An exploit definition is a dictionary which must include the following entries:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>service</strong>: the name of the service the exploit targets.</p>
+<ul class="simple">
+<li><p>Note, the value must match the name of a service defined in the <strong>services</strong> section of the network definition.</p></li>
+</ul>
+</li>
+<li><p><strong>os</strong>: the name of the operating system the exploit targets or <code class="docutils literal notranslate"><span class="pre">none</span></code> if the exploit works on all OSs.</p>
+<ul class="simple">
+<li><p>If the value is not <code class="docutils literal notranslate"><span class="pre">none</span></code> it must match the name of an OS defined in the <strong>os</strong> section of the network definition</p></li>
+</ul>
+</li>
+<li><p><strong>prob</strong>: the probability that the exploit succeeds given all preconditions are met (i.e. target host is discovered and reachable, and the host is running targete service and OS)</p></li>
+<li><p><strong>cost</strong>: the cost of performing the action. This should be a non-negative int or float and can represent the cost of the action in any sense desired (financial, time, traffic generated, etc)</p></li>
+<li><p><strong>access</strong>: the resulting access the pen-tester will get on the target host if the exploit succeeds. This can be either <em>user</em> or <em>root</em>.</p></li>
+</ol>
+</div></blockquote>
+<p>The name of the exploits can be anything you desire, so long as they are immutable and hashable (i.e. strings, ints, tuples) and unique.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tiny</span></code> example scenario has only a single exploit <code class="docutils literal notranslate"><span class="pre">e_ssh</span></code> which targets the SSH service running on linux hosts, has a cost of 1 and results in user level access:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">exploits</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">e_ssh</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssh</span>
+<span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux</span>
+<span class="w">    </span><span class="nt">prob</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<span class="w">    </span><span class="nt">cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">access</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+</pre></div>
+</div>
+</section>
+<section id="privilege-escalation">
+<h4>Privilege Escalation<a class="headerlink" href="#privilege-escalation" title="Link to this heading"></a></h4>
+<p>Similar to the exploits section, the privilege escalation section is a dictionary which maps privilege escalation action names to their definitions. A privilege escalation action definition is a dictionary which must include the following entries:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>process</strong>: the name of the process the action targets.</p>
+<ul class="simple">
+<li><p>The value must match the name of a process defined in the <strong>processes</strong> section of the network definition.</p></li>
+</ul>
+</li>
+<li><p><strong>os</strong>: the name of the operating system the action targets or <code class="docutils literal notranslate"><span class="pre">none</span></code> if the exploit works on all OSs.</p>
+<ul class="simple">
+<li><p>If the value is not <code class="docutils literal notranslate"><span class="pre">none</span></code> it must match the name of an OS defined in the <strong>os</strong> section of the network definition.</p></li>
+</ul>
+</li>
+<li><p><strong>prob</strong>: the probability that the action succeeds given all preconditions are met (i.e. pen-tester has access to target host, and the host is running target process and OS)</p></li>
+<li><p><strong>cost</strong>: the cost of performing the action. This should be a non-negative int or float and can represent the cost of the action in any sense desired (financial, time, traffic generated, etc)</p></li>
+<li><p><strong>access</strong>: the resulting access the pen-tester will get on the target host if the action succeeds. This can be either <em>user</em> or <em>root</em>.</p></li>
+</ol>
+</div></blockquote>
+<p>Similar to  exploits, the name of each privilege exploit action can be anything you desire, so long as they are immutable and hashable (i.e. strings, ints, tuples) and unique.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is not required that a scenario has any privilege escalation actions defined. In this case define the privilege escalation section to be empty: <code class="docutils literal notranslate"><span class="pre">privilege_escalation:</span> <span class="pre">{}</span></code>.</p>
+<p>Note however that you will need to make sure that it is possible to get root access on the sensitive hosts via using only exploits, otherwise the pen-tester will never be able to reach the goal.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">tiny</span></code> example scenario has a single privilege escalation action <code class="docutils literal notranslate"><span class="pre">pe_tomcat</span></code> which targets the tomcat process running on linux hosts, has a cost of 1 and results in root level access:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">privilege_escalation</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pe_tomcat</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">process</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tomcat</span>
+<span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linux</span>
+<span class="w">    </span><span class="nt">prob</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">access</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+</pre></div>
+</div>
+</section>
+<section id="scan-costs">
+<h4>Scan costs<a class="headerlink" href="#scan-costs" title="Link to this heading"></a></h4>
+<p>Each scan must have an associated non-negative cost associated with it. This cost can represent whatever you wish and will be factored in to the reward the agent recieves each time a scan is performed.</p>
+<p>Scan costs are easy to define, requiring only a non-negative float or integer value. You must specify the cost of all scans. Here, in the example <code class="docutils literal notranslate"><span class="pre">tiny</span></code> scenario, we define a cost of 1 for all scans:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">service_scan_cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">os_scan_cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">subnet_scan_cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">process_scan_cost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+</section>
+<section id="step-limit">
+<h4>Step limit<a class="headerlink" href="#step-limit" title="Link to this heading"></a></h4>
+<p>The step limit defines the maximum number of steps (i.e. actions) the pen-tester has to reach the goal within a single episode. During simulation once the step limit is reached the episode is considered done, with the agent having failed to reach the goal.</p>
+<p>Defining the step limit is easy since it requires only a positive integer value. For example, here we define a step limit of 1000 for the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> scenario:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">step_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</pre></div>
+</div>
+<p>With that we have everything we need to define a custom scenario. Running the scenario is even easier!</p>
+</section>
+</section>
+</section>
+<section id="running-a-custom-yaml-scenario">
+<span id="running-custom-yaml"></span><h2>Running a custom YAML scenario<a class="headerlink" href="#running-a-custom-yaml-scenario" title="Link to this heading"></a></h2>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">NASimEnv</span></code> from a custom YAML scenario file we use the <code class="docutils literal notranslate"><span class="pre">nasim.load()</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nasim</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;path/to/custom/scenario.yaml`)</span>
+</pre></div>
+</div>
+<p>The load function also takes some additional parameters to control the observation mode and observation and action spaces for the environment, see <a class="reference internal" href="../reference/load.html#nasim-init"><span class="std std-ref">NASimEnv load reference</span></a> for reference and <a class="reference internal" href="loading.html#env-params"><span class="std std-ref">Environment Settings</span></a> for explanation.</p>
+<p>If there are any issues with the format of your file you should recieve some, hopefully, helpful error messages when attempting to load it. Once the environment is loaded successfully you can interact with it as per normal (see <a class="reference internal" href="environment.html#env-tute"><span class="std std-ref">Interacting with NASim Environment</span></a> for more details).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scenarios.html" class="btn btn-neutral float-left" title="Understanding Scenarios" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/index.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

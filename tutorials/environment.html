@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interacting with NASim Environment &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Understanding Scenarios" href="scenarios.html" />
+    <link rel="prev" title="Starting NASim using OpenAI gym" href="gym_load.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Starting a NASim Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gym_load.html">Starting NASim using OpenAI gym</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interacting with NASim Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#starting-the-environment">Starting the environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-the-initial-observation-and-resetting-the-environment">Getting the initial observation and resetting the environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performing-a-single-step">Performing a single step</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizing-the-environment">Visualizing the environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#an-example-agent">An example agent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scenarios.html">Understanding Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_scenarios.html">Creating Custom Scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Interacting with NASim Environment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/environment.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interacting-with-nasim-environment">
+<span id="env-tute"></span><h1>Interacting with NASim Environment<a class="headerlink" href="#interacting-with-nasim-environment" title="Link to this heading"></a></h1>
+<p>Assuming you are comfortable loading an environment from a scenario (see <a class="reference internal" href="loading.html#loading-tute"><span class="std std-ref">Starting a NASim Environment</span></a> or <a class="reference internal" href="gym_load.html#gym-load-tute"><span class="std std-ref">Starting NASim using OpenAI gym</span></a>), then interacting with a NASim Environment is very easy and follows the same interface as <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium/">gymnasium</a>.</p>
+<section id="starting-the-environment">
+<h2>Starting the environment<a class="headerlink" href="#starting-the-environment" title="Link to this heading"></a></h2>
+<p>First thing is simply loading the environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nasim</span>
+<span class="c1"># load my environment in the desired way (make_benchmark, load, generate)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">make_benchmark</span><span class="p">(</span><span class="s2">&quot;tiny&quot;</span><span class="p">)</span>
+
+<span class="c1"># or using gym</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;nasim:Tiny-PO-v0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here we are using the default environment parameters: <code class="docutils literal notranslate"><span class="pre">fully_obs=False</span></code>, <code class="docutils literal notranslate"><span class="pre">flat_actions=True</span></code>, and <code class="docutils literal notranslate"><span class="pre">flat_obs=True</span></code>.</p>
+<p>The number of actions can be retrieved from the environment <code class="docutils literal notranslate"><span class="pre">action_space</span></code> attribute as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># When flat_actions=True</span>
+<span class="n">num_actions</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">n</span>
+
+<span class="c1"># When flat_actions=False</span>
+<span class="n">nvec_actions</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">nvec</span>
+</pre></div>
+</div>
+<p>The shape of the observations can be retrieved from the environment <code class="docutils literal notranslate"><span class="pre">observation_space</span></code> attribute as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">obs_shape</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</section>
+<section id="getting-the-initial-observation-and-resetting-the-environment">
+<h2>Getting the initial observation and resetting the environment<a class="headerlink" href="#getting-the-initial-observation-and-resetting-the-environment" title="Link to this heading"></a></h2>
+<p>To reset the environment and get the initial observation, use the <code class="docutils literal notranslate"><span class="pre">reset()</span></code> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">o</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">info</span></code> return value contains optional auxiliary information.</p>
+</section>
+<section id="performing-a-single-step">
+<h2>Performing a single step<a class="headerlink" href="#performing-a-single-step" title="Link to this heading"></a></h2>
+<p>A step in the environment can be taken using the <code class="docutils literal notranslate"><span class="pre">step(action)</span></code> function. Here <code class="docutils literal notranslate"><span class="pre">action</span></code> can take a few different forms depending on if using <code class="docutils literal notranslate"><span class="pre">flat_actions=True</span></code> or <code class="docutils literal notranslate"><span class="pre">flat_actions=False</span></code>, for our example we can simply pass an integer with 0 &lt;= action &lt; N, which specifies the index of the action in the action space. The <code class="docutils literal notranslate"><span class="pre">step</span></code> function then returns a <code class="docutils literal notranslate"><span class="pre">(Observation,</span> <span class="pre">float,</span> <span class="pre">bool,</span> <span class="pre">bool,</span> <span class="pre">dict)</span></code> tuple corresponding to observation, reward, done, step limit reached, auxiliary info, respectively:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">action</span> <span class="o">=</span> <span class="c1"># integer in range [0, env.action_space.n]</span>
+<span class="n">o</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">step_limit_reached</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>if <code class="docutils literal notranslate"><span class="pre">done=True</span></code> then the goal has been reached, and the episode is over. Alternatively, if the current scenario has a step limit and <code class="docutils literal notranslate"><span class="pre">step_limit_reached=True</span></code> then, well, the step limit has been reached. Following both cases, it is then recommended to stop or reset the environment, otherwise theres no gaurantee of what will happen (especially the first case).</p>
+</section>
+<section id="visualizing-the-environment">
+<h2>Visualizing the environment<a class="headerlink" href="#visualizing-the-environment" title="Link to this heading"></a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">render()</span></code> function to get a human readable visualization of the state of the environment. To use render correctly make sure to pass <code class="docutils literal notranslate"><span class="pre">render_mode=&quot;human&quot;</span></code> to the environment initialization function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nasim</span>
+<span class="c1"># load my environment in the desired way (make_benchmark, load, generate)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">make_benchmark</span><span class="p">(</span><span class="s2">&quot;tiny&quot;</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">)</span>
+
+<span class="c1"># or using gym</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;nasim:Tiny-PO-v0&quot;</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">)</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="c1"># render the environment</span>
+<span class="c1"># (if render_mode=&quot;human&quot; is not passed during initialization this will do nothing)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="an-example-agent">
+<h2>An example agent<a class="headerlink" href="#an-example-agent" title="Link to this heading"></a></h2>
+<p>Some example agents are provided in the <code class="docutils literal notranslate"><span class="pre">nasim/agents</span></code> directory. Here is a quick example of a hypothetical agent interacting with the environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nasim</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">make_benchmark</span><span class="p">(</span><span class="s2">&quot;tiny&quot;</span><span class="p">)</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">AnAgent</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">o</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">total_reward</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">step_limit_reached</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">done</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">step_limit_reached</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">choose_action</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">step_limit_reached</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">total_reward</span> <span class="o">+=</span> <span class="n">r</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total reward =&quot;</span><span class="p">,</span> <span class="n">total_reward</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It’s as simple as that.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gym_load.html" class="btn btn-neutral float-left" title="Starting NASim using OpenAI gym" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scenarios.html" class="btn btn-neutral float-right" title="Understanding Scenarios" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

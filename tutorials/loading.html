@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starting a NASim Environment &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Starting NASim using OpenAI gym" href="gym_load.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Starting a NASim Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environment-settings">Environment Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-an-environment-from-a-scenario">Loading an Environment from a Scenario</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#making-an-existing-scenario">Making an existing scenario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-a-scenario-from-a-yaml-file">Loading a scenario from a YAML file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generating-a-scenario">Generating a scenario</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gym_load.html">Starting NASim using OpenAI gym</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Interacting with NASim Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenarios.html">Understanding Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_scenarios.html">Creating Custom Scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Starting a NASim Environment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/loading.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="starting-a-nasim-environment">
+<span id="loading-tute"></span><h1>Starting a NASim Environment<a class="headerlink" href="#starting-a-nasim-environment" title="Link to this heading"></a></h1>
+<p>Interaction with NASim is done primarily via the <a class="reference internal" href="../reference/envs/environment.html#nasim.envs.environment.NASimEnv" title="nasim.envs.environment.NASimEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">NASimEnv</span></code></a> class, which handles a simulated network environment as defined by the chosen scenario.</p>
+<p>There are two ways to start a new environment: (i) via the nasim library directly, or (ii) using the <cite>gym.make()</cite> function of the gymnasium library.</p>
+<p>In this tutorial we will be covering the first method. For the second method check out <a class="reference internal" href="gym_load.html#gym-load-tute"><span class="std std-ref">Starting NASim using OpenAI gym</span></a>.</p>
+<section id="environment-settings">
+<span id="env-params"></span><h2>Environment Settings<a class="headerlink" href="#environment-settings" title="Link to this heading"></a></h2>
+<p>For initialization the NASimEnv class takes a scenario definition and three optional arguments.</p>
+<p>The scenario defines the network properties and the pen-tester specific information (e.g. exploits available, etc). For this tutorial we are going to stick to how to start a new environment, details on scenarios is covered in <a class="reference internal" href="scenarios.html#scenarios-tute"><span class="std std-ref">Understanding Scenarios</span></a>.</p>
+<p>The three optional arguments control the environment modes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fully_obs</span></code> : The observability mode of environment, if True then uses fully observable mode, otherwise is partially observable (default=False)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flat_actions</span></code> : If true then uses a flat action space, otherwise will uses a parameterised action space (default=True).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flat_obs</span></code> :  If true then uses a 1D observation space, otherwise uses a 2D observation space (default=True)</p></li>
+</ul>
+<p>If using fully observable mode (<code class="docutils literal notranslate"><span class="pre">fully_obs=True</span></code>) then the entire state of the network and the attack is observed after each step. This is ‘easy’ mode and does not reflect the reality of pen-testing, but it is useful for getting started and sanity checking algorithms and environments. When using partially observable mode (<code class="docutils literal notranslate"><span class="pre">fully_obs=False</span></code>) the agent starts with no knowledge of the location, configuration and value of every host on the network and recieves only observations of features of the directly related to the action performed at each step. This is ‘hard’ mode and reflects the reality of pen-testing more accurately.</p>
+<p>Whether the environment is fully or partially observable has no effect on the size and shape of the action and observation spaces or how the agent interacts with the environment. It will have significant implications for the algorithms used to solve the environment, but that is beyond the scope of this tutorial.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">flat_actions=True</span></code> means our action space is made up of N discrete actions, where N is based on the number of hosts in the network and the number of exploits and scans available. For our example there are 3 hosts, 1 exploit and 3 scans (OS, Service, and Subnet), for a total of 3 * (1 + 3) = 12 actions. If <code class="docutils literal notranslate"><span class="pre">flat_actions=False</span></code> then each action is a vector with each element of the vector specifying a parameter of the action. For more info see <a class="reference internal" href="../reference/envs/actions.html#actions"><span class="std std-ref">Actions</span></a>.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">flat_obs=True</span></code> means the observations returned will be a 1D vector. Otherwise if <code class="docutils literal notranslate"><span class="pre">flat_obs=False</span></code> observations will be a 2D matrix. For explanation of the features of this vector see <a class="reference internal" href="../reference/envs/observation.html#observation"><span class="std std-ref">Observation</span></a>.</p>
+</section>
+<section id="loading-an-environment-from-a-scenario">
+<span id="loading-env"></span><h2>Loading an Environment from a Scenario<a class="headerlink" href="#loading-an-environment-from-a-scenario" title="Link to this heading"></a></h2>
+<p>NASim Environments can be constructed from scenarios in three ways: making an existing scenario, loading from a .yaml file, and generating from parameters.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each of the methods described below also accept <cite>fully_obs</cite>, <cite>flat_actions</cite> and <cite>flat_obs</cite> boolen arguments.</p>
+</div>
+<section id="making-an-existing-scenario">
+<span id="make-existing"></span><h3>Making an existing scenario<a class="headerlink" href="#making-an-existing-scenario" title="Link to this heading"></a></h3>
+<p>This is the easiest method for loading a new environment and closely matches the <a class="reference external" href="https://github.com/openai/gym">OpenAI gym</a> way of doing things. Loading an existing scenario is as easy as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nasim</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">make_benchmark</span><span class="p">(</span><span class="s2">&quot;tiny&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And you are done.</p>
+<p>You can also pass in a a random seed using the <cite>seed</cite> argument, which will have an effect when using a generated scenario.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method only works with the benchmark scenarios that come with NASim (for the full list see the <a class="reference internal" href="../reference/scenarios/benchmark_scenarios.html#benchmark-scenarios"><span class="std std-ref">Benchmark Scenarios</span></a>).</p>
+</div>
+</section>
+<section id="loading-a-scenario-from-a-yaml-file">
+<h3>Loading a scenario from a YAML file<a class="headerlink" href="#loading-a-scenario-from-a-yaml-file" title="Link to this heading"></a></h3>
+<p>If you wish to load an existing or custom scenario defined in a YAML file, this is also very straight forward:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nasim</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;path/to/scenario.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And once again, you are done (given your file is in a valid format)!</p>
+</section>
+<section id="generating-a-scenario">
+<h3>Generating a scenario<a class="headerlink" href="#generating-a-scenario" title="Link to this heading"></a></h3>
+<p>The final method for loading a new environment is to generate it using the NASim scenario generator. There are quite a number of parameters that can be used to control the what scenario is generated (for a full list see the <a class="reference internal" href="../reference/scenarios/generator.html#scenario-generator"><span class="std std-ref">Scenario Generator</span></a> class), but the two key parameters are the number of hosts in the network and the number of services running (which also controls number of exploits, unless otherwise specified).</p>
+<p>To generate a new environment with 5 hosts running a possible 3 services:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nasim</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And your done! If you want to pass in some other parameters (say the number of possible operating systems) these can be passed in as keyword arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">num_os</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once again, for a full list of available parameters refer to the <a class="reference internal" href="../reference/scenarios/generator.html#scenario-generator"><span class="std std-ref">Scenario Generator</span></a> documentation.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gym_load.html" class="btn btn-neutral float-right" title="Starting NASim using OpenAI gym" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scenario Generation Explanation &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sim-to-Real Gap Considerations" href="sim_to_real.html" />
+    <link rel="prev" title="Explanations" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Explanations</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Scenario Generation Explanation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#network-topology">Network Topology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#correlated-configurations">Correlated Configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generated-exploit-probabilities">Generated Exploit Probabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firewall">Firewall</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sim_to_real.html">Sim-to-Real Gap Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Explanations</a></li>
+      <li class="breadcrumb-item active">Scenario Generation Explanation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/explanations/scenario_generation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scenario-generation-explanation">
+<span id="id1"></span><h1>Scenario Generation Explanation<a class="headerlink" href="#scenario-generation-explanation" title="Link to this heading"></a></h1>
+<p>Generating the scenarios involves a number of design decisions that strongly determine the form of the network being generated. This document aims to explain some of the more technical details of generating the scenarios when using the <a class="reference internal" href="../reference/scenarios/generator.html#scenario-generator"><span class="std std-ref">Scenario Generator</span></a> class.</p>
+<p>The scenario generator is based heavily on prior work, specifically:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.aaai.org/ocs/index.php/AAAI/AAAI12/paper/viewPaper/4996">Sarraute, Carlos, Olivier Buffet, and Jörg Hoffmann. “POMDPs make better hackers: Accounting for uncertainty in penetration testing.” Twenty-Sixth AAAI Conference on Artificial Intelligence. 2012.</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1705.05088">Speicher, Patrick, et al. “Towards Automated Network Mitigation Analysis (extended).” arXiv preprint arXiv:1705.05088 (2017).</a></p></li>
+</ul>
+<section id="network-topology">
+<h2>Network Topology<a class="headerlink" href="#network-topology" title="Link to this heading"></a></h2>
+<p>Description to come. Till then we recommend reading the papers linked above, especially the appendix of Speicher et al (2017).</p>
+</section>
+<section id="correlated-configurations">
+<span id="id2"></span><h2>Correlated Configurations<a class="headerlink" href="#correlated-configurations" title="Link to this heading"></a></h2>
+<p>When generating a scenario with <code class="docutils literal notranslate"><span class="pre">uniform=False</span></code> the scenario will be generated with host configurations being correlated. This means that rather than the OS and services it is running being chosen uniformly at random from the available OSs and services, they are chosen randomly with increased probability given to OSs and services that are being run by other hosts whose configuration was generated earlier.</p>
+<p>Specifically, the distribution of configurations of each host in the network are generated using a Nested Dirichlet Process, so that across the network hosts will have corelated configurations (i.e. certain services/configurations will be more common across hosts on the network). The correlation can be controlled using three parameters: <code class="docutils literal notranslate"><span class="pre">alpha_H</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha_V</span></code>, and <code class="docutils literal notranslate"><span class="pre">lambda_V</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">alpha_H</span></code> and <code class="docutils literal notranslate"><span class="pre">alpha_V</span></code> control the degree of correlation, with lower values leading to greater correlation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lambda_V</span></code> controls the average number of services running per host, with higher values will mean more services (so more vulnerable) hosts on average.</p>
+<p>All three parameters must have a positive value, with the defaults being <code class="docutils literal notranslate"><span class="pre">alpha_H=2.0</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha_V=2.0</span></code>, and <code class="docutils literal notranslate"><span class="pre">lambda_V=1.0</span></code>, which tends to generate networks with fairly correlated configurations where hosts have only a single vulnerability on average.</p>
+</section>
+<section id="generated-exploit-probabilities">
+<span id="generated-exploit-probs"></span><h2>Generated Exploit Probabilities<a class="headerlink" href="#generated-exploit-probabilities" title="Link to this heading"></a></h2>
+<p>Success probabilities of each exploit are determined based on the value of the <code class="docutils literal notranslate"><span class="pre">exploit_probs</span></code> argument, as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">exploit_probs=None</span></code> - probabilities generated randomly from uniform distribution over the interval (0, 1).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exploit_probs=float</span></code> - probability of each exploit is set to the float value, which must be a valid probability.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exploit_probs=list[float]</span></code> - probability of each exploit is set to corresponding float value in list. This requires that the length of the list matches the number of exploits as specified by the <code class="docutils literal notranslate"><span class="pre">num_exploits</span></code> argument.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exploit_probs=&quot;mixed&quot;</span></code> - probabilities chosen from a set distribution which is based on the <a class="reference external" href="https://www.first.org/cvss/v2/guide">CVSS attack complexity</a> distribution of <a class="reference external" href="https://go.recordedfuture.com/hubfs/reports/cta-2018-0327.pdf">top 10 vulnerabilities in 2017</a>. Specifically, exploit probabilities are chosen from [0.3, 0.6, 0.9] which correspond to high, medium and low attack complexity, respectively, with probabilities [0.2, 0.4, 0.4].</p></li>
+</ul>
+<p>For deterministic exploits set <code class="docutils literal notranslate"><span class="pre">exploit_probs=1.0</span></code>.</p>
+</section>
+<section id="firewall">
+<h2>Firewall<a class="headerlink" href="#firewall" title="Link to this heading"></a></h2>
+<p>The firewall restricts which services can be communicated with between hosts on different subnets. This is mostly done by selecting services at random to block between each subnet, with some contraints.</p>
+<p>Firstly, there exists no firewall between subnets in the user zone. So communication between hosts on different user subnets is allowed for all services.</p>
+<p>Secondly, the number of services blocked is controlled by the <code class="docutils literal notranslate"><span class="pre">restrictiveness</span></code> parameter. This controls the number of services to block between zones (i.e. between the internet, DMZ, sensitive, and user zones).</p>
+<p>Thirdly, to ensure that the goal can be reached, traffic from at least one service running on each subnet will be allowed between each zone. This may mean more services will be allowed than restrictiveness parameter.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Explanations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sim_to_real.html" class="btn btn-neutral float-right" title="Sim-to-Real Gap Considerations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

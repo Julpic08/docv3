@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benchmark Scenarios &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Scenario Generator" href="generator.html" />
+    <link rel="prev" title="Scenario Reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../load.html">NASimEnv load reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agents/index.html">Agents Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../envs/index.html">Environment Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Scenario Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Benchmark Scenarios</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#all-benchmark-scenarios">All benchmark scenarios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes-on-the-scenarios">Notes on the scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generator.html">Scenario Generator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Scenario Reference</a></li>
+      <li class="breadcrumb-item active">Benchmark Scenarios</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/scenarios/benchmark_scenarios.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="benchmark-scenarios">
+<span id="id1"></span><h1>Benchmark Scenarios<a class="headerlink" href="#benchmark-scenarios" title="Link to this heading"></a></h1>
+<p>There are a number of existing scenarios that come with NASim. They cover a range of complexities and sizes and are intended to be used to help with benchmarking algorithms. Additionally, there are two flavours of existing scenarios: <strong>static</strong> and <strong>generated</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For full list of benchmark scenarios see <a class="reference internal" href="#all-benchmark-scenarios"><span class="std std-ref">All benchmark scenarios</span></a>.</p>
+</div>
+<p><strong>Static</strong> scenarios are predefined and will be exactly the same every time they are loaded. They are defined in .yaml files in the <cite>nasim/scenarios/benchmark/</cite> directory.</p>
+<p><strong>Generated</strong> are scenario generated using the <a class="reference internal" href="generator.html#scenario-generator"><span class="std std-ref">Scenario Generator</span></a> based on some parameters. While certain features of the each scenario will remain constant between generations (e.g. number of hosts, services, exploits), other features may change (e.g. specific host configurations, firewall settings, exploit probabilities) depending on the random seed.</p>
+<section id="all-benchmark-scenarios">
+<span id="id2"></span><h2>All benchmark scenarios<a class="headerlink" href="#all-benchmark-scenarios" title="Link to this heading"></a></h2>
+<p>The following table provides details of each benchmark scenario currently available in NASim.</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">NASim Benchmark scenarios</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Subnets</p></th>
+<th class="head"><p>Hosts</p></th>
+<th class="head"><p>OS</p></th>
+<th class="head"><p>Services</p></th>
+<th class="head"><p>Processes</p></th>
+<th class="head"><p>Exploits</p></th>
+<th class="head"><p>PrivEscs</p></th>
+<th class="head"><p>Actions</p></th>
+<th class="head"><p>Observation Dims</p></th>
+<th class="head"><p>States</p></th>
+<th class="head"><p>Step Limit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>tiny</p></td>
+<td><p>static</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>18</p></td>
+<td><p>4X14</p></td>
+<td><p>576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>tiny-hard</p></td>
+<td><p>static</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>27</p></td>
+<td><p>4X18</p></td>
+<td><p>9216</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-even"><td><p>tiny-small</p></td>
+<td><p>static</p></td>
+<td><p>5</p></td>
+<td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>45</p></td>
+<td><p>6X20</p></td>
+<td><p>15360</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>small</p></td>
+<td><p>static</p></td>
+<td><p>5</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>72</p></td>
+<td><p>9X23</p></td>
+<td><p>24576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-even"><td><p>small-honeypot</p></td>
+<td><p>static</p></td>
+<td><p>5</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>72</p></td>
+<td><p>9X23</p></td>
+<td><p>24576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>small-linear</p></td>
+<td><p>static</p></td>
+<td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>72</p></td>
+<td><p>9X22</p></td>
+<td><p>24576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-even"><td><p>medium</p></td>
+<td><p>static</p></td>
+<td><p>6</p></td>
+<td><p>16</p></td>
+<td><p>2</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>192</p></td>
+<td><p>17X27</p></td>
+<td><p>393216</p></td>
+<td><p>2000</p></td>
+</tr>
+<tr class="row-odd"><td><p>medium-single-site</p></td>
+<td><p>static</p></td>
+<td><p>2</p></td>
+<td><p>16</p></td>
+<td><p>2</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>192</p></td>
+<td><p>17x34</p></td>
+<td><p>393216</p></td>
+<td><p>2000</p></td>
+</tr>
+<tr class="row-even"><td><p>medium-multi-site</p></td>
+<td><p>static</p></td>
+<td><p>7</p></td>
+<td><p>16</p></td>
+<td><p>2</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>192</p></td>
+<td><p>17X29</p></td>
+<td><p>393216</p></td>
+<td><p>2000</p></td>
+</tr>
+<tr class="row-odd"><td><p>tiny-gen</p></td>
+<td><p>generated</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>18</p></td>
+<td><p>4X14</p></td>
+<td><p>576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-even"><td><p>tiny-gen-rangoal</p></td>
+<td><p>generated</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>18</p></td>
+<td><p>4X14</p></td>
+<td><p>576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>small-gen</p></td>
+<td><p>generated</p></td>
+<td><p>5</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>72</p></td>
+<td><p>9X23</p></td>
+<td><p>24576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-even"><td><p>small-gen-rangoal</p></td>
+<td><p>generated</p></td>
+<td><p>5</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>72</p></td>
+<td><p>9X23</p></td>
+<td><p>24576</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>medium-gen</p></td>
+<td><p>generated</p></td>
+<td><p>6</p></td>
+<td><p>16</p></td>
+<td><p>2</p></td>
+<td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>176</p></td>
+<td><p>17X26</p></td>
+<td><p>196608</p></td>
+<td><p>2000</p></td>
+</tr>
+<tr class="row-even"><td><p>large-gen</p></td>
+<td><p>generated</p></td>
+<td><p>8</p></td>
+<td><p>23</p></td>
+<td><p>3</p></td>
+<td><p>7</p></td>
+<td><p>3</p></td>
+<td><p>7</p></td>
+<td><p>3</p></td>
+<td><p>322</p></td>
+<td><p>24X32</p></td>
+<td><p>4521984</p></td>
+<td><p>5000</p></td>
+</tr>
+<tr class="row-odd"><td><p>huge-gen</p></td>
+<td><p>generated</p></td>
+<td><p>11</p></td>
+<td><p>38</p></td>
+<td><p>4</p></td>
+<td><p>10</p></td>
+<td><p>4</p></td>
+<td><p>10</p></td>
+<td><p>4</p></td>
+<td><p>684</p></td>
+<td><p>39X40</p></td>
+<td><p>2.39E+08</p></td>
+<td><p>10000</p></td>
+</tr>
+<tr class="row-even"><td><p>pocp-1-gen</p></td>
+<td><p>generated</p></td>
+<td><p>10</p></td>
+<td><p>35</p></td>
+<td><p>2</p></td>
+<td><p>50</p></td>
+<td><p>2</p></td>
+<td><p>60</p></td>
+<td><p>2</p></td>
+<td><p>2310</p></td>
+<td><p>36X75</p></td>
+<td><p>1.51E+19</p></td>
+<td><p>30000</p></td>
+</tr>
+<tr class="row-odd"><td><p>pocp-2-gen</p></td>
+<td><p>generated</p></td>
+<td><p>21</p></td>
+<td><p>95</p></td>
+<td><p>3</p></td>
+<td><p>10</p></td>
+<td><p>3</p></td>
+<td><p>30</p></td>
+<td><p>3</p></td>
+<td><p>3515</p></td>
+<td><p>96X48</p></td>
+<td><p>1.49E+08</p></td>
+<td><p>30000</p></td>
+</tr>
+</tbody>
+</table>
+<p>The number of actions is calculated as <em>Hosts X (Exploits + PrivEscs + 4)</em>. The +4 is for the 4 scans available for each host (OSScan, ServiceScan, ProcessScan, and SubnetScan).</p>
+<p>The number of states is calculated as <em>Hosts X 2^(3 + OS + Services) X 3 *. Here the first 3 comes from the *compromised</em>, <em>reachable</em> and <em>discovered</em> features of the state and the base of 2 is due to all state features being boolean (present/absent). The second 3 comes from the number of possible access levels possible on a host.</p>
+<p>The table below provides mean steps to reach the goal and reward (+/- stdev) for a uniform random agent, with scores averaged over 100 runs.</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">NASim Benchmark scenarios Agent scores</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario Name</p></th>
+<th class="head"><p>Steps</p></th>
+<th class="head"><p>Total Reward</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>tiny</p></th>
+<th class="head"><p>108.02 +/- 43.82</p></th>
+<th class="head"><p>91.98 +/- 43.82</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>tiny-hard</p></td>
+<td><p>135.31 +/- 65.56</p></td>
+<td><p>21.05 +/- 85.45</p></td>
+</tr>
+<tr class="row-even"><td><p>tiny-small</p></td>
+<td><p>319.56 +/- 124.26</p></td>
+<td><p>-225.86 +/- 167.14</p></td>
+</tr>
+<tr class="row-odd"><td><p>small</p></td>
+<td><p>501.94 +/- 181.40</p></td>
+<td><p>-469.80 +/- 241.99</p></td>
+</tr>
+<tr class="row-even"><td><p>small-honeypot</p></td>
+<td><p>448.72 +/- 151.62</p></td>
+<td><p>-476.08 +/- 222.41</p></td>
+</tr>
+<tr class="row-odd"><td><p>small-linear</p></td>
+<td><p>566.00 +/- 177.08</p></td>
+<td><p>-555.08 +/- 241.06</p></td>
+</tr>
+<tr class="row-even"><td><p>medium</p></td>
+<td><p>1371.45 +/- 420.41</p></td>
+<td><p>-1875.29 +/- 660.62</p></td>
+</tr>
+<tr class="row-odd"><td><p>medium-single-site</p></td>
+<td><p>654.89 +/- 385.76</p></td>
+<td><p>-782.17 +/- 581.14</p></td>
+</tr>
+<tr class="row-even"><td><p>medium-multi-site</p></td>
+<td><p>1060.94 +/- 389.86</p></td>
+<td><p>-1394.71 +/- 590.89</p></td>
+</tr>
+<tr class="row-odd"><td><p>tiny-gen</p></td>
+<td><p>86.56 +/- 40.16</p></td>
+<td><p>116.43 +/- 40.15</p></td>
+</tr>
+<tr class="row-even"><td><p>tiny-gen-rgoal</p></td>
+<td><p>98.94 +/- 47.83</p></td>
+<td><p>104.02 +/- 47.80</p></td>
+</tr>
+<tr class="row-odd"><td><p>small-gen</p></td>
+<td><p>435.73 +/- 205.61</p></td>
+<td><p>-228.53 +/- 214.34</p></td>
+</tr>
+<tr class="row-even"><td><p>small-gen-rgoal</p></td>
+<td><p>423.52 +/- 226.68</p></td>
+<td><p>-218.62 +/- 240.20</p></td>
+</tr>
+<tr class="row-odd"><td><p>medium-gen</p></td>
+<td><p>1002.94 +/- 468.10</p></td>
+<td><p>-788.64 +/- 481.86</p></td>
+</tr>
+<tr class="row-even"><td><p>large-gen</p></td>
+<td><p>2548.62 +/- 1224.08</p></td>
+<td><p>-2327.34 +/- 1241.92</p></td>
+</tr>
+<tr class="row-odd"><td><p>huge-gen</p></td>
+<td><p>6303.86 +/- 2403.40</p></td>
+<td><p>-6075.69 +/- 2434.77</p></td>
+</tr>
+<tr class="row-even"><td><p>pocp-1-gen</p></td>
+<td><p>15189.46 +/- 6879.75</p></td>
+<td><p>-14947.80 +/- 6887.43</p></td>
+</tr>
+<tr class="row-odd"><td><p>pocp-2-gen</p></td>
+<td><p>17211.38 +/- 5855.83</p></td>
+<td><p>-16871.05 +/- 5864.58</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-on-the-scenarios">
+<h2>Notes on the scenarios<a class="headerlink" href="#notes-on-the-scenarios" title="Link to this heading"></a></h2>
+<p>The <em>tiny</em>, <em>small</em>, <em>medium</em>, <em>large</em>, and <em>huge</em> (and their generated versions) are all based on the network scenarios first used by:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.aaai.org/ocs/index.php/AAAI/AAAI12/paper/viewPaper/4996">Sarraute, Carlos, Olivier Buffet, and Jörg Hoffmann. “POMDPs make better hackers: Accounting for uncertainty in penetration testing.” Twenty-Sixth AAAI Conference on Artificial Intelligence. 2012.</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1705.05088">Speicher, Patrick, et al. “Towards Automated Network Mitigation Analysis (extended).” arXiv preprint arXiv:1705.05088 (2017).</a></p></li>
+</ul>
+<p>The <em>pocp-1-gen</em> and <em>pocp-2-gen</em> scenarios are based on the work by:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.aaai.org/ocs/index.php/ICAPS/ICAPS18/paper/viewPaper/17766">Shmaryahu, D., Shani, G., Hoffmann, J., &amp; Steinmetz, M. (2018, June). Simulated penetration testing as contingent planning. In Twenty-Eighth International Conference on Automated Planning and Scheduling.</a></p></li>
+</ul>
+<p>The other scenarios were made up by author after looking at some random google images of network layouts, and playing around with different interesting network topologies.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Scenario Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generator.html" class="btn btn-neutral float-right" title="Scenario Generator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

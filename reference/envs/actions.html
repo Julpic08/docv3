@@ -1,0 +1,963 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Actions &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Environment" href="environment.html" />
+    <link rel="prev" title="Environment Reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../load.html">NASimEnv load reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agents/index.html">Agents Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Environment Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.ActionResult"><code class="docutils literal notranslate"><span class="pre">ActionResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.Exploit"><code class="docutils literal notranslate"><span class="pre">Exploit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.FlatActionSpace"><code class="docutils literal notranslate"><span class="pre">FlatActionSpace</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.NoOp"><code class="docutils literal notranslate"><span class="pre">NoOp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.OSScan"><code class="docutils literal notranslate"><span class="pre">OSScan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.ParameterisedActionSpace"><code class="docutils literal notranslate"><span class="pre">ParameterisedActionSpace</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.PrivilegeEscalation"><code class="docutils literal notranslate"><span class="pre">PrivilegeEscalation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.ProcessScan"><code class="docutils literal notranslate"><span class="pre">ProcessScan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.ServiceScan"><code class="docutils literal notranslate"><span class="pre">ServiceScan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.SubnetScan"><code class="docutils literal notranslate"><span class="pre">SubnetScan</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.action.load_action_list"><code class="docutils literal notranslate"><span class="pre">load_action_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="host_vector.html">HostVector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observation.html">Observation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state.html">State</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../scenarios/index.html">Scenario Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Environment Reference</a></li>
+      <li class="breadcrumb-item active">Actions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/envs/actions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="actions">
+<span id="id1"></span><h1>Actions<a class="headerlink" href="#actions" title="Link to this heading"></a></h1>
+<p id="module-nasim.envs.action">Action related classes for the NASim environment.</p>
+<p>This module contains the different action classes that are used
+to implement actions within a NASim environment, along within the
+different ActionSpace classes, and the ActionResult class.</p>
+<p class="rubric">Notes</p>
+<p><strong>Actions:</strong></p>
+<p>Every action inherits from the base <a class="reference internal" href="#nasim.envs.action.Action" title="nasim.envs.action.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a> class, which defines
+some common attributes and functions. Different types of actions
+are implemented as subclasses of the Action class.</p>
+<p>Action types implemented:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nasim.envs.action.Exploit" title="nasim.envs.action.Exploit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exploit</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nasim.envs.action.PrivilegeEscalation" title="nasim.envs.action.PrivilegeEscalation"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrivilegeEscalation</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nasim.envs.action.ServiceScan" title="nasim.envs.action.ServiceScan"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServiceScan</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nasim.envs.action.OSScan" title="nasim.envs.action.OSScan"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSScan</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nasim.envs.action.SubnetScan" title="nasim.envs.action.SubnetScan"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubnetScan</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nasim.envs.action.ProcessScan" title="nasim.envs.action.ProcessScan"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProcessScan</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nasim.envs.action.NoOp" title="nasim.envs.action.NoOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoOp</span></code></a></p></li>
+</ul>
+<p><strong>Action Spaces:</strong></p>
+<p>There are two types of action spaces, depending on if you are using flat
+actions or not:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nasim.envs.action.FlatActionSpace" title="nasim.envs.action.FlatActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlatActionSpace</span></code></a></p></li>
+<li><p><a class="reference internal" href="#nasim.envs.action.ParameterisedActionSpace" title="nasim.envs.action.ParameterisedActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterisedActionSpace</span></code></a></p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.Action">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">Action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action" title="Link to this definition"></a></dt>
+<dd><p>The base abstract action class in the environment</p>
+<p>There are multiple types of actions (e.g. exploit, scan, etc.), but every
+action has some common attributes.</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#nasim.envs.action.Action.name" title="Link to this definition"></a></dt>
+<dd><p>the name of action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.target">
+<span class="sig-name descname"><span class="pre">target</span></span><a class="headerlink" href="#nasim.envs.action.Action.target" title="Link to this definition"></a></dt>
+<dd><p>the (subnet, host) address of target of the action. The target of the
+action could be the address of a host that the action is being used
+against (e.g. for exploits or targeted scans) or could be the host that
+the action is being executed on (e.g. for subnet scans).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(int, int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.cost">
+<span class="sig-name descname"><span class="pre">cost</span></span><a class="headerlink" href="#nasim.envs.action.Action.cost" title="Link to this definition"></a></dt>
+<dd><p>the cost of performing the action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.prob">
+<span class="sig-name descname"><span class="pre">prob</span></span><a class="headerlink" href="#nasim.envs.action.Action.prob" title="Link to this definition"></a></dt>
+<dd><p>the success probability of the action. This is the probability that
+the action works given that it’s preconditions are met. E.g. a remote
+exploit targeting a host that you cannot communicate with will always
+fail. For deterministic actions this will be 1.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.req_access">
+<span class="sig-name descname"><span class="pre">req_access</span></span><a class="headerlink" href="#nasim.envs.action.Action.req_access" title="Link to this definition"></a></dt>
+<dd><p>the required access level to perform action. For for on host actions
+(i.e. subnet scan, process scan, and privilege escalation) this will
+be the access on the target. For remote actions (i.e. service scan,
+os scan, and exploits) this will be the access on a pivot host (i.e.
+a compromised host that can reach the target).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AccessLevel,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – name of action</p></li>
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success for a given action (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_exploit">
+<span class="sig-name descname"><span class="pre">is_exploit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_exploit" title="Link to this definition"></a></dt>
+<dd><p>Check if action is an exploit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is exploit, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_noop">
+<span class="sig-name descname"><span class="pre">is_noop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_noop" title="Link to this definition"></a></dt>
+<dd><p>Check if action is a do nothing action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is a noop action, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_os_scan">
+<span class="sig-name descname"><span class="pre">is_os_scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_os_scan" title="Link to this definition"></a></dt>
+<dd><p>Check if action is an OS scan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is an OS scan, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_privilege_escalation">
+<span class="sig-name descname"><span class="pre">is_privilege_escalation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_privilege_escalation" title="Link to this definition"></a></dt>
+<dd><p>Check if action is privilege escalation action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is privilege escalation action, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_process_scan">
+<span class="sig-name descname"><span class="pre">is_process_scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_process_scan" title="Link to this definition"></a></dt>
+<dd><p>Check if action is a process scan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is a process scan, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_remote">
+<span class="sig-name descname"><span class="pre">is_remote</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_remote" title="Link to this definition"></a></dt>
+<dd><p>Check if action is a remote action</p>
+<p>A remote action is one where the target host is a remote host (i.e. the
+action is not performed locally on the target)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is remote, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_scan">
+<span class="sig-name descname"><span class="pre">is_scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_scan" title="Link to this definition"></a></dt>
+<dd><p>Check if action is a scan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is scan, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_service_scan">
+<span class="sig-name descname"><span class="pre">is_service_scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_service_scan" title="Link to this definition"></a></dt>
+<dd><p>Check if action is a service scan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is service scan, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Action.is_subnet_scan">
+<span class="sig-name descname"><span class="pre">is_subnet_scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Action.is_subnet_scan" title="Link to this definition"></a></dt>
+<dd><p>Check if action is a subnet scan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if action is a subnet scan, otherwise False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">ActionResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">success</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">services</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discovered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permission_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">undefined_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newly_discovered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ActionResult" title="Link to this definition"></a></dt>
+<dd><p>A dataclass for storing the results of an Action.</p>
+<p>These results are then used to update the full state and observation.</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.success">
+<span class="sig-name descname"><span class="pre">success</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.success" title="Link to this definition"></a></dt>
+<dd><p>True if exploit/scan was successful, False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.value" title="Link to this definition"></a></dt>
+<dd><p>value gained from action. Is the value of the host if successfuly
+exploited, otherwise 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.services">
+<span class="sig-name descname"><span class="pre">services</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.services" title="Link to this definition"></a></dt>
+<dd><p>services identified by action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.os">
+<span class="sig-name descname"><span class="pre">os</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.os" title="Link to this definition"></a></dt>
+<dd><p>OS identified by action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.processes">
+<span class="sig-name descname"><span class="pre">processes</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.processes" title="Link to this definition"></a></dt>
+<dd><p>processes identified by action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.access">
+<span class="sig-name descname"><span class="pre">access</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.access" title="Link to this definition"></a></dt>
+<dd><p>access gained by action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.discovered">
+<span class="sig-name descname"><span class="pre">discovered</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.discovered" title="Link to this definition"></a></dt>
+<dd><p>host addresses discovered by action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.connection_error">
+<span class="sig-name descname"><span class="pre">connection_error</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.connection_error" title="Link to this definition"></a></dt>
+<dd><p>True if action failed due to connection error (e.g. could
+not reach target)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.permission_error">
+<span class="sig-name descname"><span class="pre">permission_error</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.permission_error" title="Link to this definition"></a></dt>
+<dd><p>True if action failed due to a permission error (e.g. incorrect access
+level to perform action)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.undefined_error">
+<span class="sig-name descname"><span class="pre">undefined_error</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.undefined_error" title="Link to this definition"></a></dt>
+<dd><p>True if action failed due to an undefined error (e.g. random exploit
+failure)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.newly_discovered">
+<span class="sig-name descname"><span class="pre">newly_discovered</span></span><a class="headerlink" href="#nasim.envs.action.ActionResult.newly_discovered" title="Link to this definition"></a></dt>
+<dd><p>host addresses discovered for the first time by action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">success</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">services</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discovered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permission_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">undefined_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newly_discovered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ActionResult.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>success</strong> (<em>bool</em>) – True if exploit/scan was successful, False otherwise</p></li>
+<li><p><strong>value</strong> (<em>float</em><em>, </em><em>optional</em>) – value gained from action (default=0.0)</p></li>
+<li><p><strong>services</strong> (<em>dict</em><em>, </em><em>optional</em>) – services identified by action (default=None={})</p></li>
+<li><p><strong>os</strong> (<em>dict</em><em>, </em><em>optional</em>) – OS identified by action (default=None={})</p></li>
+<li><p><strong>processes</strong> (<em>dict</em><em>, </em><em>optional</em>) – processes identified by action (default=None={})</p></li>
+<li><p><strong>access</strong> (<em>dict</em><em>, </em><em>optional</em>) – access gained by action (default=None={})</p></li>
+<li><p><strong>discovered</strong> (<em>dict</em><em>, </em><em>optional</em>) – host addresses discovered by action (default=None={})</p></li>
+<li><p><strong>connection_error</strong> (<em>bool</em><em>, </em><em>optional</em>) – True if action failed due to connection error (default=False)</p></li>
+<li><p><strong>permission_error</strong> (<em>bool</em><em>, </em><em>optional</em>) – True if action failed due to a permission error (default=False)</p></li>
+<li><p><strong>undefined_error</strong> (<em>bool</em><em>, </em><em>optional</em>) – True if action failed due to an undefined error (default=False)</p></li>
+<li><p><strong>newly_discovered</strong> (<em>dict</em><em>, </em><em>optional</em>) – host addresses discovered for first time by action (default=None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.ActionResult.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ActionResult.info" title="Link to this definition"></a></dt>
+<dd><p>Get results as dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>action results information</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.Exploit">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">Exploit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Exploit" title="Link to this definition"></a></dt>
+<dd><p>An Exploit action in the environment</p>
+<p>Inherits from the base Action Class.</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Exploit.service">
+<span class="sig-name descname"><span class="pre">service</span></span><a class="headerlink" href="#nasim.envs.action.Exploit.service" title="Link to this definition"></a></dt>
+<dd><p>the service targeted by exploit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Exploit.os">
+<span class="sig-name descname"><span class="pre">os</span></span><a class="headerlink" href="#nasim.envs.action.Exploit.os" title="Link to this definition"></a></dt>
+<dd><p>the OS targeted by exploit. If None then exploit works for all OSs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.Exploit.access">
+<span class="sig-name descname"><span class="pre">access</span></span><a class="headerlink" href="#nasim.envs.action.Exploit.access" title="Link to this definition"></a></dt>
+<dd><p>the access level gained on target if exploit succeeds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.Exploit.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.Exploit.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>service</strong> (<em>str</em>) – the target service</p></li>
+<li><p><strong>os</strong> (<em>str</em><em>, </em><em>optional</em>) – the target OS of exploit, if None then exploit works for all OS
+(default=None)</p></li>
+<li><p><strong>access</strong> (<em>int</em><em>, </em><em>optional</em>) – the access level gained on target if exploit succeeds (default=0)</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.FlatActionSpace">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">FlatActionSpace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.FlatActionSpace" title="Link to this definition"></a></dt>
+<dd><p>Flat Action space for NASim environment.</p>
+<p>Inherits and implements the gym.spaces.Discrete action space</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.FlatActionSpace.n">
+<span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#nasim.envs.action.FlatActionSpace.n" title="Link to this definition"></a></dt>
+<dd><p>the number of actions in the action space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.FlatActionSpace.actions">
+<span class="sig-name descname"><span class="pre">actions</span></span><a class="headerlink" href="#nasim.envs.action.FlatActionSpace.actions" title="Link to this definition"></a></dt>
+<dd><p>the list of the Actions in the action space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of Actions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.FlatActionSpace.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.FlatActionSpace.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scenario</strong> (<em>Scenario</em>) – scenario description</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.FlatActionSpace.get_action">
+<span class="sig-name descname"><span class="pre">get_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.FlatActionSpace.get_action" title="Link to this definition"></a></dt>
+<dd><p>Get Action object corresponding to action idx</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action_idx</strong> (<em>int</em>) – the action idx</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Corresponding Action object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nasim.envs.action.Action" title="nasim.envs.action.Action">Action</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.NoOp">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">NoOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.NoOp" title="Link to this definition"></a></dt>
+<dd><p>A do nothing action in the environment</p>
+<p>Inherits from the base Action Class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.NoOp.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.NoOp.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – name of action</p></li>
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success for a given action (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.OSScan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">OSScan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.OSScan" title="Link to this definition"></a></dt>
+<dd><p>An OS Scan action in the environment</p>
+<p>Inherits from the base Action Class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.OSScan.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.OSScan.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success for a given action (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.ParameterisedActionSpace">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">ParameterisedActionSpace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ParameterisedActionSpace" title="Link to this definition"></a></dt>
+<dd><p>A parameterised action space for NASim environment.</p>
+<p>Inherits and implements the gym.spaces.MultiDiscrete action space, where
+each dimension corresponds to a different action parameter.</p>
+<p>The action parameters (in order) are:</p>
+<ol class="arabic" start="0">
+<li><p>Action Type = [0, 5]</p>
+<p>Where:</p>
+<blockquote>
+<div><p>0=Exploit,</p>
+<p>1=PrivilegeEscalation,</p>
+<p>2=ServiceScan,</p>
+<p>3=OSScan,</p>
+<p>4=SubnetScan,</p>
+<p>5=ProcessScan,</p>
+</div></blockquote>
+</li>
+<li><p>Subnet = [0, #subnets-1]</p>
+<p>-1 since we don’t include the internet subnet</p>
+</li>
+<li><p>Host = [0, max subnets size-1]</p></li>
+<li><p>OS = [0, #OS]</p>
+<p>Where 0=None.</p>
+</li>
+<li><p>Service = [0, #services - 1]</p></li>
+<li><p>Process = [0, #processes]</p>
+<p>Where 0=None.</p>
+</li>
+</ol>
+<p>Note that OS, Service and Process are only important for exploits and
+privilege escalation actions.</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ParameterisedActionSpace.nvec">
+<span class="sig-name descname"><span class="pre">nvec</span></span><a class="headerlink" href="#nasim.envs.action.ParameterisedActionSpace.nvec" title="Link to this definition"></a></dt>
+<dd><p>vector of the of the size of each parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Numpy.Array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.ParameterisedActionSpace.actions">
+<span class="sig-name descname"><span class="pre">actions</span></span><a class="headerlink" href="#nasim.envs.action.ParameterisedActionSpace.actions" title="Link to this definition"></a></dt>
+<dd><p>the list of all the Actions in the action space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of Actions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.ParameterisedActionSpace.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ParameterisedActionSpace.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scenario</strong> (<em>Scenario</em>) – scenario description</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.ParameterisedActionSpace.get_action">
+<span class="sig-name descname"><span class="pre">get_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action_vec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ParameterisedActionSpace.get_action" title="Link to this definition"></a></dt>
+<dd><p>Get Action object corresponding to action vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action_vector</strong> (<em>list</em><em> of </em><em>ints</em><em> or </em><em>tuple</em><em> of </em><em>ints</em><em> or </em><em>Numpy.Array</em>) – the action vector</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Corresponding Action object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nasim.envs.action.Action" title="nasim.envs.action.Action">Action</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>if host# specified in action vector is greater than
+the number of hosts in the specified subnet, then host#
+will be changed to host# % subnet size.</p></li>
+<li><p>if action is an exploit and parameters do not match
+any exploit definition in the scenario description then
+a NoOp action is returned with 0 cost.</p></li>
+</ol>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.PrivilegeEscalation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">PrivilegeEscalation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.PrivilegeEscalation" title="Link to this definition"></a></dt>
+<dd><p>A privilege escalation action in the environment</p>
+<p>Inherits from the base Action Class.</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.PrivilegeEscalation.process">
+<span class="sig-name descname"><span class="pre">process</span></span><a class="headerlink" href="#nasim.envs.action.PrivilegeEscalation.process" title="Link to this definition"></a></dt>
+<dd><p>the process targeted by the privilege escalation. If None the action
+works independent of a process</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.PrivilegeEscalation.os">
+<span class="sig-name descname"><span class="pre">os</span></span><a class="headerlink" href="#nasim.envs.action.PrivilegeEscalation.os" title="Link to this definition"></a></dt>
+<dd><p>the OS targeted by privilege escalation. If None then action works
+for all OSs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.action.PrivilegeEscalation.access">
+<span class="sig-name descname"><span class="pre">access</span></span><a class="headerlink" href="#nasim.envs.action.PrivilegeEscalation.access" title="Link to this definition"></a></dt>
+<dd><p>the access level resulting from privilege escalation action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.PrivilegeEscalation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.PrivilegeEscalation.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>access</strong> (<em>int</em>) – the access level resulting from the privilege escalation</p></li>
+<li><p><strong>process</strong> (<em>str</em><em>, </em><em>optional</em>) – the target process, if None the action does not require a process
+to work (default=None)</p></li>
+<li><p><strong>os</strong> (<em>str</em><em>, </em><em>optional</em>) – the target OS of privilege escalation action, if None then action
+works for all OS (default=None)</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.ProcessScan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">ProcessScan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ProcessScan" title="Link to this definition"></a></dt>
+<dd><p>A Process Scan action in the environment</p>
+<p>Inherits from the base Action Class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.ProcessScan.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ProcessScan.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success for a given action (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.ServiceScan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">ServiceScan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ServiceScan" title="Link to this definition"></a></dt>
+<dd><p>A Service Scan action in the environment</p>
+<p>Inherits from the base Action Class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.ServiceScan.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.ServiceScan.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success for a given action (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.action.SubnetScan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">SubnetScan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.SubnetScan" title="Link to this definition"></a></dt>
+<dd><p>A Subnet Scan action in the environment</p>
+<p>Inherits from the base Action Class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.action.SubnetScan.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">req_access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">USER</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.SubnetScan.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>(</em><em>int</em><em>, </em><em>int</em><em>)</em>) – address of target</p></li>
+<li><p><strong>cost</strong> (<em>float</em>) – cost of performing action</p></li>
+<li><p><strong>prob</strong> (<em>float</em><em>, </em><em>optional</em>) – probability of success for a given action (default=1.0)</p></li>
+<li><p><strong>req_access</strong> (<em>AccessLevel</em><em>, </em><em>optional</em>) – the required access level to perform action
+(default=AccessLevel.USER)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nasim.envs.action.load_action_list">
+<span class="sig-prename descclassname"><span class="pre">nasim.envs.action.</span></span><span class="sig-name descname"><span class="pre">load_action_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.action.load_action_list" title="Link to this definition"></a></dt>
+<dd><p>Load list of actions for environment for given scenario</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scenario</strong> (<em>Scenario</em>) – the scenario</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of all actions in environment</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Environment Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="environment.html" class="btn btn-neutral float-right" title="Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

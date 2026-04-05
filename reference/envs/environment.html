@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Environment &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="HostVector" href="host_vector.html" />
+    <link rel="prev" title="Actions" href="actions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../load.html">NASimEnv load reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agents/index.html">Agents Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Environment Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nasim.envs.environment.NASimEnv"><code class="docutils literal notranslate"><span class="pre">NASimEnv</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="host_vector.html">HostVector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="observation.html">Observation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state.html">State</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../scenarios/index.html">Scenario Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Environment Reference</a></li>
+      <li class="breadcrumb-item active">Environment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/envs/environment.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="environment">
+<span id="id1"></span><h1>Environment<a class="headerlink" href="#environment" title="Link to this heading"></a></h1>
+<p id="module-nasim.envs.environment">The main Environment class for NASim: NASimEnv.</p>
+<p>The NASimEnv class is the main interface for agents interacting with NASim.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">nasim.envs.environment.</span></span><span class="sig-name descname"><span class="pre">NASimEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fully_obs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat_obs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv" title="Link to this definition"></a></dt>
+<dd><p>A simulated computer network environment for pen-testing.</p>
+<p>Implements the gymnasium interface.</p>
+<p>…</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.name" title="Link to this definition"></a></dt>
+<dd><p>the environment scenario name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.scenario">
+<span class="sig-name descname"><span class="pre">scenario</span></span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.scenario" title="Link to this definition"></a></dt>
+<dd><p>Scenario object, defining the properties of the environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Scenario</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.action_space">
+<span class="sig-name descname"><span class="pre">action_space</span></span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.action_space" title="Link to this definition"></a></dt>
+<dd><p>Action space for environment.
+If <em>flat_action=True</em> then this is a discrete action space (which
+subclasses gymnasium.spaces.Discrete), so each action is represented by an
+integer.
+If <em>flat_action=False</em> then this is a parameterised action space (which
+subclasses gymnasium.spaces.MultiDiscrete), so each action is represented
+using a list of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="actions.html#nasim.envs.action.FlatActionSpace" title="nasim.envs.action.FlatActionSpace">FlatActionSpace</a> or <a class="reference internal" href="actions.html#nasim.envs.action.ParameterisedActionSpace" title="nasim.envs.action.ParameterisedActionSpace">ParameterisedActionSpace</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.observation_space">
+<span class="sig-name descname"><span class="pre">observation_space</span></span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.observation_space" title="Link to this definition"></a></dt>
+<dd><p>observation space for environment.
+If <em>flat_obs=True</em> then observations are represented by a 1D vector,
+otherwise observations are represented as a 2D matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>gymnasium.spaces.Box</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.current_state">
+<span class="sig-name descname"><span class="pre">current_state</span></span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.current_state" title="Link to this definition"></a></dt>
+<dd><p>the current state of the environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="state.html#nasim.envs.state.State" title="nasim.envs.state.State">State</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.last_obs">
+<span class="sig-name descname"><span class="pre">last_obs</span></span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.last_obs" title="Link to this definition"></a></dt>
+<dd><p>the last observation that was generated by environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="observation.html#nasim.envs.observation.Observation" title="nasim.envs.observation.Observation">Observation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.steps" title="Link to this definition"></a></dt>
+<dd><p>the number of steps performed since last reset (this does not include
+generative steps)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fully_obs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat_actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat_obs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">render_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scenario</strong> (<em>Scenario</em>) – Scenario object, defining the properties of the environment</p></li>
+<li><p><strong>fully_obs</strong> (<em>bool</em><em>, </em><em>optional</em>) – The observability mode of environment, if True then uses fully
+observable mode, otherwise is partially observable (default=False)</p></li>
+<li><p><strong>flat_actions</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true then uses a flat action space, otherwise will uses a
+parameterised action space (default=True).</p></li>
+<li><p><strong>flat_obs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true then uses a 1D observation space, otherwise uses a 2D
+observation space (default=True)</p></li>
+<li><p><strong>render_mode</strong> (<em>str</em><em>, </em><em>optional</em>) – The render mode to use for the environment.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.close" title="Link to this definition"></a></dt>
+<dd><p>After the user has finished using the environment, close contains the code necessary to “clean up” the environment.</p>
+<p>This is critical for closing rendering windows, database or HTTP connections.
+Calling <code class="docutils literal notranslate"><span class="pre">close</span></code> on an already closed environment has no effect and won’t raise an error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.generate_initial_state">
+<span class="sig-name descname"><span class="pre">generate_initial_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.generate_initial_state" title="Link to this definition"></a></dt>
+<dd><p>Generate the initial state for the environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The initial state</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="state.html#nasim.envs.state.State" title="nasim.envs.state.State">State</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This does not reset the current state of the environment (use
+<a class="reference internal" href="#nasim.envs.environment.NASimEnv.reset" title="nasim.envs.environment.NASimEnv.reset"><code class="xref py py-func docutils literal notranslate"><span class="pre">reset()</span></code></a> for that).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.generate_random_initial_state">
+<span class="sig-name descname"><span class="pre">generate_random_initial_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.generate_random_initial_state" title="Link to this definition"></a></dt>
+<dd><p>Generates a random initial state for environment.</p>
+<p>This only randomizes the host configurations (os, services)
+using a uniform distribution, so may result in networks where
+it is not possible to reach the goal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A random initial state</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="state.html#nasim.envs.state.State" title="nasim.envs.state.State">State</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.generative_step">
+<span class="sig-name descname"><span class="pre">generative_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.generative_step" title="Link to this definition"></a></dt>
+<dd><p>Run one step of the environment using action in given state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<a class="reference internal" href="state.html#nasim.envs.state.State" title="nasim.envs.state.State"><em>State</em></a>) – The state to perform the action in</p></li>
+<li><p><strong>action</strong> (<a class="reference internal" href="actions.html#nasim.envs.action.Action" title="nasim.envs.action.Action"><em>Action</em></a><em>, </em><em>int</em><em>, </em><em>list</em><em>, </em><em>NumpyArray</em>) – Action to perform. If not Action object, then if using
+flat actions this should be an int and if using non-flat actions
+this should be an indexable array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>State</em> – the next state after action was performed</p></li>
+<li><p><em>Observation</em> – observation from performing action</p></li>
+<li><p><em>float</em> – reward from performing action</p></li>
+<li><p><em>bool</em> – whether a terminal state has been reached or not</p></li>
+<li><p><em>dict</em> – auxiliary information regarding step
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">nasim.env.action.ActionResult.info()</span></code>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.get_action_mask">
+<span class="sig-name descname"><span class="pre">get_action_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.get_action_mask" title="Link to this definition"></a></dt>
+<dd><p>Get a vector mask for valid actions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy vector of 1’s and 0’s, one for each action. Where an
+index will be 1 if action is valid given current state, or
+0 if action is invalid.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.get_minimum_hops">
+<span class="sig-name descname"><span class="pre">get_minimum_hops</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.get_minimum_hops" title="Link to this definition"></a></dt>
+<dd><p>Get the minimum number of network hops required to reach targets.</p>
+<p>That is minimum number of hosts that must be traversed in the network
+in order to reach all sensitive hosts on the network starting from the
+initial state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>minumum possible number of network hops to reach target hosts</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.get_score_upper_bound">
+<span class="sig-name descname"><span class="pre">get_score_upper_bound</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.get_score_upper_bound" title="Link to this definition"></a></dt>
+<dd><p>Get the theoretical upper bound for total reward for scenario.</p>
+<p>The theoretical upper bound score is where the agent exploits only a
+single host in each subnet that is required to reach sensitive hosts
+along the shortest bath in network graph, and exploits the all
+sensitive hosts (i.e. the minimum network hops). Assuming action cost
+of 1 and each sensitive host is exploitable from any other connected
+subnet (which may not be true, hence being an upper bound).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>theoretical max score</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.goal_reached">
+<span class="sig-name descname"><span class="pre">goal_reached</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.goal_reached" title="Link to this definition"></a></dt>
+<dd><p>Check if the state is the goal state.</p>
+<p>The goal state is when all sensitive hosts have been compromised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<a class="reference internal" href="state.html#nasim.envs.state.State" title="nasim.envs.state.State"><em>State</em></a><em>, </em><em>optional</em>) – a state, if None will use current_state of environment
+(default=None)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if state is goal state, otherwise False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.render" title="Link to this definition"></a></dt>
+<dd><p>Render environment.</p>
+<p>Implements gymnasium.Env.render().</p>
+<p>See render module for more details on modes and symbols.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.render_action">
+<span class="sig-name descname"><span class="pre">render_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.render_action" title="Link to this definition"></a></dt>
+<dd><p>Renders human readable version of action.</p>
+<p>This is mainly useful for getting a text description of the action
+that corresponds to a given integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> (<a class="reference internal" href="actions.html#nasim.envs.action.Action" title="nasim.envs.action.Action"><em>Action</em></a><em> or </em><em>int</em><em> or </em><em>list</em><em> or </em><em>NumpyArray</em>) – Action to render. If not Action object, then if using
+flat actions this should be an int and if using non-flat actions
+this should be an indexable array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.render_episode">
+<span class="sig-name descname"><span class="pre">render_episode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">episode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.render_episode" title="Link to this definition"></a></dt>
+<dd><p>Render an episode as sequence of network graphs, where an episode
+is a sequence of (state, action, reward, done) tuples generated from
+interactions with environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>episode</strong> (<em>list</em>) – list of (State, Action, reward, done) tuples</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – width of GUI window</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – height of GUI window</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.render_network_graph">
+<span class="sig-name descname"><span class="pre">render_network_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.render_network_graph" title="Link to this definition"></a></dt>
+<dd><p>Render a plot of network as a graph with hosts as nodes arranged
+into subnets and showing connections between subnets. Renders current
+state of network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>Axes</em>) – matplotlib axis to plot graph on, or None to plot on new axis</p></li>
+<li><p><strong>show</strong> (<em>bool</em>) – whether to display plot, or simply setup plot and showing plot
+can be handled elsewhere by user</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.render_obs">
+<span class="sig-name descname"><span class="pre">render_obs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.render_obs" title="Link to this definition"></a></dt>
+<dd><p>Render observation.</p>
+<p>See render module for more details on modes and symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>str</em>) – rendering mode</p></li>
+<li><p><strong>obs</strong> (<a class="reference internal" href="observation.html#nasim.envs.observation.Observation" title="nasim.envs.observation.Observation"><em>Observation</em></a><em> or </em><em>numpy.ndarray</em><em>, </em><em>optional</em>) – the observation to render, if None will render last observation.
+If numpy.ndarray it must be in format that matches Observation
+(i.e. ndarray returned by step method) (default=None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.render_state">
+<span class="sig-name descname"><span class="pre">render_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'human'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.render_state" title="Link to this definition"></a></dt>
+<dd><p>Render state.</p>
+<p>See render module for more details on modes and symbols.</p>
+<dl class="simple">
+<dt>If mode = ASCI:</dt><dd><p>Machines displayed in rows, with one row for each subnet and
+hosts displayed in order of id within subnet</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>str</em>) – rendering mode</p></li>
+<li><p><strong>state</strong> (<a class="reference internal" href="state.html#nasim.envs.state.State" title="nasim.envs.state.State"><em>State</em></a><em> or </em><em>numpy.ndarray</em><em>, </em><em>optional</em>) – the State to render, if None will render current state
+If numpy.ndarray it must be in format that matches State
+(i.e. ndarray returned by generative_step method) (default=None)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset the state of the environment and returns the initial state.</p>
+<p>Implements gymnasium.Env.reset().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – the optional seed for the environments RNG</p></li>
+<li><p><strong>options</strong> (<em>dict</em><em>, </em><em>optional</em>) – optional environment options (does nothing in NASim at the moment)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>numpy.Array</em> – the initial observation of the environment</p></li>
+<li><p><em>dict</em> – auxiliary information regarding reset</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nasim.envs.environment.NASimEnv.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nasim.envs.environment.NASimEnv.step" title="Link to this definition"></a></dt>
+<dd><p>Run one step of the environment using action.</p>
+<p>Implements gymnasium.Env.step().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> (<a class="reference internal" href="actions.html#nasim.envs.action.Action" title="nasim.envs.action.Action"><em>Action</em></a><em> or </em><em>int</em><em> or </em><em>list</em><em> or </em><em>NumpyArray</em>) – Action to perform. If not Action object, then if using
+flat actions this should be an int and if using non-flat actions
+this should be an indexable array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>numpy.Array</em> – observation from performing action</p></li>
+<li><p><em>float</em> – reward from performing action</p></li>
+<li><p><em>bool</em> – whether the episode reached a terminal state or not (i.e. all
+target machines have been successfully compromised)</p></li>
+<li><p><em>bool</em> – whether the episode has reached the step limit (if one exists)</p></li>
+<li><p><em>dict</em> – auxiliary information regarding step
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">nasim.env.action.ActionResult.info()</span></code>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="actions.html" class="btn btn-neutral float-left" title="Actions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="host_vector.html" class="btn btn-neutral float-right" title="HostVector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

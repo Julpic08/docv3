@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starting NASim using OpenAI gym &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interacting with NASim Environment" href="environment.html" />
+    <link rel="prev" title="Starting a NASim Environment" href="loading.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Starting a NASim Environment</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Starting NASim using OpenAI gym</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environment-naming">Environment Naming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Interacting with NASim Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scenarios.html">Understanding Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_scenarios.html">Creating Custom Scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Starting NASim using OpenAI gym</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/gym_load.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="starting-nasim-using-openai-gym">
+<span id="gym-load-tute"></span><h1>Starting NASim using OpenAI gym<a class="headerlink" href="#starting-nasim-using-openai-gym" title="Link to this heading"></a></h1>
+<p>On startup NASim also registers each benchmark scenario as an <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium/">Gymnasium</a>  environment, allowing NASim benchmark environments to be loaded using <code class="docutils literal notranslate"><span class="pre">gymnasium.make()</span></code>.</p>
+<p><a class="reference internal" href="../reference/scenarios/benchmark_scenarios.html#all-benchmark-scenarios"><span class="std std-ref">All benchmark scenarios</span></a> can be loaded using <code class="docutils literal notranslate"><span class="pre">gymnasium.make()</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Custom scenarios must be loaded using the nasim library directly, see <a class="reference internal" href="loading.html#loading-tute"><span class="std std-ref">Starting a NASim Environment</span></a>.</p>
+</div>
+<section id="environment-naming">
+<h2>Environment Naming<a class="headerlink" href="#environment-naming" title="Link to this heading"></a></h2>
+<p>Unlike when starting an environment using the <code class="docutils literal notranslate"><span class="pre">nasim</span></code> library directly, where environment modes are specified as arguments to the <code class="docutils literal notranslate"><span class="pre">nasim.make_benchmark()</span></code> function, when using <code class="docutils literal notranslate"><span class="pre">gymnasium.make()</span></code> the scenario and mode are specified in a single name.</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">gymnasium.make()</span></code> each environment has the following mode and naming convention:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ScenarioName[PO][2D][VA]-vX</span></code></p>
+</div></blockquote>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ScenarioName</span></code> is the name of the benchmark scenario in Camel Casing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[PO]</span></code> is optional and specifies the environment is in partially observable mode, if it is not included the environment is in fully observable mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[2D]</span></code> is optional and specifies the environment is to return 2D observations, if it is not included the environment returns 1D observations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[VA]</span></code> is optional and specifies the environment is to accept Vector actions (parametrised actions), if it is not included the environment expects integer (flat) actions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vX</span></code> is the environment version. Currently (as of version <code class="docutils literal notranslate"><span class="pre">0.10.0</span></code>) all environments are on <code class="docutils literal notranslate"><span class="pre">v0</span></code></p></li>
+</ul>
+<p>For example, the ‘tiny’ benchmark scenario in partially observable mode with flat action-space and flat observation space has the name:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">TinyPO-v0</span></code></p>
+</div></blockquote>
+<p>Or the ‘small-gen’ benchmark scenario in fully observable mode with parametrised action-space and flat observation-space has the name:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">SmallGenVA-v0</span></code></p>
+</div></blockquote>
+<p>Or the ‘medium-single-site’ benchmark scenario in partially observable mode with parametrised action-space and 2D observation-space has the name:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">MediumSingleSitePO2DVA-v0</span></code></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference internal" href="loading.html#env-params"><span class="std std-ref">Environment Settings</span></a> for more explanation on the different modes.</p>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Now we understand the naming of environments, making a new environment using <code class="docutils literal notranslate"><span class="pre">gym.make()</span></code> is easy.</p>
+<p>For example to create a new <code class="docutils literal notranslate"><span class="pre">TinyPO-v0</span></code> environment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gymnasium</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;nasim:TinyPO-v0&quot;</span><span class="p">)</span>
+
+<span class="c1"># to specify render mode</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;nasim:TinyPO-v0&quot;</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;human&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="loading.html" class="btn btn-neutral float-left" title="Starting a NASim Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="environment.html" class="btn btn-neutral float-right" title="Interacting with NASim Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
