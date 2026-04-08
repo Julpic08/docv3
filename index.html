@@ -76,6 +76,41 @@
 <h1>Le monde de julpic!<a class="headerlink" href="#le-monde-de-julpic" title="Link to this heading"></a></h1>
 <p>Network Attack Simulator (NASim) is a lightweight, high-level network attack simulator written in python. It is designed to be used for rapid testing of autonomous pen-testing agents using reinforcement learning and planning. It is a simulator by definition so does not replicate all details of attacking a real system but it instead aims to capture some of the more salient features of network pen-testing such as the large and changing sizes of the state and action spaces, partial observability and varied network topology.</p>
 <p>The environment is modelled after the <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium/">gymnasium (formerly Open AI gym)</a> interface.</p>
+</section>
+<section id="gestion-des-droits-utilisateurs">
+<h1>Gestion des droits utilisateurs<a class="headerlink" href="#gestion-des-droits-utilisateurs" title="Link to this heading"></a></h1>
+<section id="pourquoi-les-droits-doivent-etre-limites">
+<h2>Pourquoi les droits doivent être limités<a class="headerlink" href="#pourquoi-les-droits-doivent-etre-limites" title="Link to this heading"></a></h2>
+<p>Attribuer des droits trop larges, même en lecture seule, peut introduire des failles de sécurité importantes.</p>
+<p>Un exemple classique est l’accès au fichier <code class="docutils literal notranslate"><span class="pre">.bash_history</span></code> d’un utilisateur. Ce fichier contient l’historique des commandes exécutées dans le terminal, et peut exposer :</p>
+<ul class="simple">
+<li><p>Des mots de passe saisis en clair</p></li>
+<li><p>Des commandes d’administration sensibles</p></li>
+<li><p>Des chemins vers des fichiers critiques</p></li>
+<li><p>Des informations sur l’architecture du système</p></li>
+</ul>
+<p>Même sans accès en écriture, un attaquant peut exploiter ces informations pour :</p>
+<ul class="simple">
+<li><p>Escalader ses privilèges</p></li>
+<li><p>Accéder à des services internes</p></li>
+<li><p>Rejouer certaines commandes critiques</p></li>
+</ul>
+</section>
+<section id="exemple-d-attaque-via-bash-history">
+<h2>Exemple d’attaque via .bash_history<a class="headerlink" href="#exemple-d-attaque-via-bash-history" title="Link to this heading"></a></h2>
+<p>Le diagramme ci-dessous illustre une attaque typique exploitant un fichier <code class="docutils literal notranslate"><span class="pre">.bash_history</span></code> accessible en lecture :</p>
+<a class="reference internal image-reference" href="_images/diagramme_attaque_lecture_seule.png"><img alt="Diagramme attaque bash history" class="align-center" src="_images/diagramme_attaque_lecture_seule.png" style="width: 600px;" />
+</a>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>Le principe du moindre privilège doit toujours être appliqué :</p>
+<ul class="simple">
+<li><p>Un utilisateur ne doit avoir accès qu’aux ressources strictement nécessaires</p></li>
+<li><p>Même les droits en lecture doivent être contrôlés</p></li>
+<li><p>Les fichiers sensibles doivent être protégés, y compris contre la simple consultation</p></li>
+</ul>
+</section>
 <section id="what-s-new">
 <h2>What’s new<a class="headerlink" href="#what-s-new" title="Link to this heading"></a></h2>
 <section id="version-0-12-0">
