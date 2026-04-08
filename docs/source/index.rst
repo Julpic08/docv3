@@ -5,6 +5,45 @@ Network Attack Simulator (NASim) is a lightweight, high-level network attack sim
 
 The environment is modelled after the `gymnasium (formerly Open AI gym) <https://github.com/Farama-Foundation/Gymnasium/>`_ interface.
 
+Gestion des droits utilisateurs
+===============================
+
+Pourquoi les droits doivent être limités
+----------------------------------------
+
+Attribuer des droits trop larges, même en lecture seule, peut introduire des failles de sécurité importantes.
+
+Un exemple classique est l'accès au fichier ``.bash_history`` d'un utilisateur. Ce fichier contient l'historique des commandes exécutées dans le terminal, et peut exposer :
+
+- Des mots de passe saisis en clair
+- Des commandes d'administration sensibles
+- Des chemins vers des fichiers critiques
+- Des informations sur l'architecture du système
+
+Même sans accès en écriture, un attaquant peut exploiter ces informations pour :
+
+- Escalader ses privilèges
+- Accéder à des services internes
+- Rejouer certaines commandes critiques
+
+Exemple d'attaque via .bash_history
+----------------------------------
+
+Le diagramme ci-dessous illustre une attaque typique exploitant un fichier ``.bash_history`` accessible en lecture :
+
+.. image:: media/diagramme_attaque_lecture_seule.png
+   :alt: Diagramme attaque bash history
+   :align: center
+   :width: 600px
+
+Conclusion
+----------
+
+Le principe du moindre privilège doit toujours être appliqué :
+
+- Un utilisateur ne doit avoir accès qu'aux ressources strictement nécessaires
+- Même les droits en lecture doivent être contrôlés
+- Les fichiers sensibles doivent être protégés, y compris contre la simple consultation
 
 What's new
 ----------
