@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Starting a NASim Environment &mdash; NASim 0.12.0 documentation</title>
+  <title>adsimulator &mdash; NASim 0.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
@@ -18,9 +18,7 @@
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Starting NASim using OpenAI gym" href="gym_load.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,25 +40,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Starting a NASim Environment</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#environment-settings">Environment Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading-an-environment-from-a-scenario">Loading an Environment from a Scenario</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#making-an-existing-scenario">Making an existing scenario</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#loading-a-scenario-from-a-yaml-file">Loading a scenario from a YAML file</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#generating-a-scenario">Generating a scenario</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="gym_load.html">Starting NASim using OpenAI gym</a></li>
-<li class="toctree-l2"><a class="reference internal" href="environment.html">Interacting with NASim Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scenarios.html">Understanding Scenarios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating_scenarios.html">Creating Custom Scenarios</a></li>
-</ul>
-</li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explanations/index.html">Explanations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
@@ -80,10 +61,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
-      <li class="breadcrumb-item active">Starting a NASim Environment</li>
+      <li class="breadcrumb-item active">adsimulator</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorials/loading.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/tutoriel/adsimulator.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,15 +71,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="starting-a-nasim-environment">
-<span id="loading-tute"></span><h1>Starting a NASim Environment<a class="headerlink" href="#starting-a-nasim-environment" title="Link to this heading"></a></h1>
+  <section id="adsimulator">
+<span id="id1"></span><h1>adsimulator<a class="headerlink" href="#adsimulator" title="Link to this heading"></a></h1>
 <p>Interaction with NASim is done primarily via the <a class="reference internal" href="../reference/envs/environment.html#nasim.envs.environment.NASimEnv" title="nasim.envs.environment.NASimEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">NASimEnv</span></code></a> class, which handles a simulated network environment as defined by the chosen scenario.</p>
 <p>There are two ways to start a new environment: (i) via the nasim library directly, or (ii) using the <cite>gym.make()</cite> function of the gymnasium library.</p>
-<p>In this tutorial we will be covering the first method. For the second method check out <a class="reference internal" href="../tutoriel/gym_load.html#gym-load-tute"><span class="std std-ref">Starting NASim using OpenAI gym</span></a>.</p>
+<p>In this tutorial we will be covering the first method. For the second method check out <a class="reference internal" href="gym_load.html#gym-load-tute"><span class="std std-ref">Starting NASim using OpenAI gym</span></a>.</p>
 <section id="environment-settings">
 <span id="env-params"></span><h2>Environment Settings<a class="headerlink" href="#environment-settings" title="Link to this heading"></a></h2>
 <p>For initialization the NASimEnv class takes a scenario definition and three optional arguments.</p>
-<p>The scenario defines the network properties and the pen-tester specific information (e.g. exploits available, etc). For this tutorial we are going to stick to how to start a new environment, details on scenarios is covered in <a class="reference internal" href="../tutoriel/scenarios.html#scenarios-tute"><span class="std std-ref">Understanding Scenarios</span></a>.</p>
+<p>The scenario defines the network properties and the pen-tester specific information (e.g. exploits available, etc). For this tutorial we are going to stick to how to start a new environment, details on scenarios is covered in <a class="reference internal" href="scenarios.html#scenarios-tute"><span class="std std-ref">Understanding Scenarios</span></a>.</p>
 <p>The three optional arguments control the environment modes:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">fully_obs</span></code> : The observability mode of environment, if True then uses fully observable mode, otherwise is partially observable (default=False)</p></li>
@@ -161,10 +141,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gym_load.html" class="btn btn-neutral float-right" title="Starting NASim using OpenAI gym" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

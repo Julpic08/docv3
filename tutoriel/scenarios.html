@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Understanding Scenarios &mdash; NASim 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NASim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explanations/index.html">Explanations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NASim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Understanding Scenarios</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutoriel/scenarios.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="understanding-scenarios">
+<span id="scenarios-tute"></span><h1>Understanding Scenarios<a class="headerlink" href="#understanding-scenarios" title="Link to this heading"></a></h1>
+<p>A scenario in NASim defines all the necessary properties for creating a network environment. Each scenario definition can be broken down into two components: the network configuration and the pen-tester.</p>
+<section id="network-configuration">
+<h2>Network Configuration<a class="headerlink" href="#network-configuration" title="Link to this heading"></a></h2>
+<p>The network configuration is defined by a the following properties:</p>
+<ul class="simple">
+<li><p><em>subnets</em>: the number and size of the subnets in the network.</p></li>
+<li><p><em>topology</em>: how the different subnets in the network are connected</p></li>
+<li><p><em>host configurations</em>: the address, OS, services, processes, and firewalls for each host in the network</p></li>
+<li><p><em>firewall</em>: which communication is prevented between subnets</p></li>
+</ul>
+<p><em>Note</em>, for the host configurations we are, in general, only interested in services and processes that the pen-tester has exploits for, so we will typically ignore any non-vulnerable services and processes in order to reduce the problem size.</p>
+</section>
+<section id="pen-tester">
+<h2>Pen-Tester<a class="headerlink" href="#pen-tester" title="Link to this heading"></a></h2>
+<p>The pen-tester is defined by:</p>
+<ul class="simple">
+<li><p><em>exploits</em>: the set of exploits available to the pen-tester</p></li>
+<li><p><em>privescs</em>: the set of priviledge escalation actions available to the pen-tester</p></li>
+<li><p><em>scan costs</em>: the cost of performing each type of scan (service, OS, process, and subnet)</p></li>
+<li><p><em>sensitive hosts</em>: the target hosts on the network and their value</p></li>
+</ul>
+</section>
+<section id="example-scenario">
+<h2>Example Scenario<a class="headerlink" href="#example-scenario" title="Link to this heading"></a></h2>
+<p>To illustrate these properties here we show an example scenario, where the aim of the pen-tester is to gain root access to the server in the sensitive subnet and one of the hosts in the user subnet.</p>
+<p>The figure below shows the the layout of our example network.</p>
+<a class="reference internal image-reference" href="../_images/example_network1.png"><img alt="../_images/example_network1.png" src="../_images/example_network1.png" width="700" />
+</a>
+<p>From the figure we can see that this network has the following properties:</p>
+<ul class="simple">
+<li><p><em>subnets</em>: three subnets: DMZ with a single server, Sensitive with a single server and User with three user machines.</p></li>
+<li><p><em>topology</em>: Only the DMZ is connected to the internet, while all subnets in network are interconnected.</p></li>
+<li><p><em>host configurations</em>: The address, OS, services, and processes running on each host are shown next to each host (e.g. the server in the DMZ subnet has address (1, 0), has a linux OS, is running http and ssh services, and the tomcat process). The host firewall settings are show in the table in the top-right of the figure. Here only host <em>(1, 0)</em> has a firewall configured which blocks any SSH connections from hosts <em>(3, 0)</em> and <em>(3, 1)</em>.</p></li>
+<li><p><em>firewall</em>: The arrows above and below the firwalls indicate which services can be communicated with in each direction between subnets and between the DMZ subnet and the internet (e.g. the internet can communicate with http services running on hosts in the DMZ, while the firewall blocks no communication from the DMZ to the internet).</p></li>
+</ul>
+<p>Next we need to define our pen-tester, which we specify based on the scenario we wish to simulate.</p>
+<ul class="simple">
+<li><p><em>exploits</em>: for this scenario the pen-tester has access to three exploits</p>
+<ol class="arabic simple">
+<li><p><em>ssh_exploit</em>: which exploits the ssh service running on windows machine, has a cost of 2, a success probability of 0.6, and results in user level access if successful.</p></li>
+<li><p><em>ftp_exploit</em>: which exploits the ftp service running on a linux machine, has a cost of 1, a sucess probability of 0.9, and results in root level access if successful.</p></li>
+<li><p><em>http_exploit</em>: which exploits the http service running on any OS, has a cost of 3, a success probability of 1.0, and results in user level access if successful.</p></li>
+</ol>
+</li>
+<li><p><em>privescs</em>: for this scenario the pen-tester has access to two priviledge escalation actions</p>
+<ol class="arabic simple">
+<li><p><em>pe_tomcat</em>: exploits the tomcat process running on a linux machine to gain root access. It has a cost of 1 and success probability of 1.0.</p></li>
+<li><p><em>pe_daclsvc</em>: exploits the daclsvc process running on a windows machine to gain root access. It has a cost of 1 and success probability of 1.0.</p></li>
+</ol>
+</li>
+<li><p><em>scan costs</em>: here we need to specify the cost of each type of scan</p>
+<ol class="arabic simple">
+<li><p><em>service_scan</em>: 1</p></li>
+<li><p><em>os_scan</em>: 2</p></li>
+<li><p><em>process_scan</em>: 1</p></li>
+<li><p><em>subnet_scan</em>: 1</p></li>
+</ol>
+</li>
+<li><p><em>sensitive hosts</em>: here we have two target hosts</p>
+<ol class="arabic simple">
+<li><p><em>(2, 0), 1000</em> : the server running on sensitive subnet, which has a value of 1000.</p></li>
+<li><p><em>(3, 2), 1000</em> : the last host running on user subnet, which has a value of 1000.</p></li>
+</ol>
+</li>
+</ul>
+<p>And with that our scenario is fully defined and we have everything we need to run an attack simulation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jonathon Schwartz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

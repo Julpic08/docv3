@@ -18,9 +18,7 @@
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Reference" href="../reference/index.html" />
-    <link rel="prev" title="Understanding Scenarios" href="scenarios.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,24 +40,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loading.html">Starting a NASim Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gym_load.html">Starting NASim using OpenAI gym</a></li>
-<li class="toctree-l2"><a class="reference internal" href="environment.html">Interacting with NASim Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scenarios.html">Understanding Scenarios</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Creating Custom Scenarios</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defining-a-custom-scenario-using-yaml">Defining a custom scenario using YAML</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#defining-the-network">Defining the network</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#defining-the-pen-tester">Defining the pen-tester</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#running-a-custom-yaml-scenario">Running a custom YAML scenario</a></li>
-</ul>
-</li>
-</ul>
-</li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../explanations/index.html">Explanations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../community/index.html">Community &amp; Development</a></li>
@@ -79,10 +61,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
       <li class="breadcrumb-item active">Creating Custom Scenarios</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorials/creating_scenarios.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/tutoriel/creating_scenarios.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -344,18 +325,15 @@
 <span class="n">env</span> <span class="o">=</span> <span class="n">nasim</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;path/to/custom/scenario.yaml`)</span>
 </pre></div>
 </div>
-<p>The load function also takes some additional parameters to control the observation mode and observation and action spaces for the environment, see <a class="reference internal" href="../reference/load.html#nasim-init"><span class="std std-ref">NASimEnv load reference</span></a> for reference and <a class="reference internal" href="../tutoriel/adsimulator.html#env-params"><span class="std std-ref">Environment Settings</span></a> for explanation.</p>
-<p>If there are any issues with the format of your file you should recieve some, hopefully, helpful error messages when attempting to load it. Once the environment is loaded successfully you can interact with it as per normal (see <a class="reference internal" href="../tutoriel/environment.html#env-tute"><span class="std std-ref">Interacting with NASim Environment</span></a> for more details).</p>
+<p>The load function also takes some additional parameters to control the observation mode and observation and action spaces for the environment, see <a class="reference internal" href="../reference/load.html#nasim-init"><span class="std std-ref">NASimEnv load reference</span></a> for reference and <a class="reference internal" href="adsimulator.html#env-params"><span class="std std-ref">Environment Settings</span></a> for explanation.</p>
+<p>If there are any issues with the format of your file you should recieve some, hopefully, helpful error messages when attempting to load it. Once the environment is loaded successfully you can interact with it as per normal (see <a class="reference internal" href="environment.html#env-tute"><span class="std std-ref">Interacting with NASim Environment</span></a> for more details).</p>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="scenarios.html" class="btn btn-neutral float-left" title="Understanding Scenarios" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../reference/index.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
