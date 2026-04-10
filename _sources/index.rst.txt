@@ -38,6 +38,8 @@ Le diagramme ci-dessous illustre une attaque typique exploitant un fichier ``.ba
    :align: center
    :width: 600px
 
+
+
 Conclusion
 ----------
 
