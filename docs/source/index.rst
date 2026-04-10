@@ -63,21 +63,6 @@ The Docs
    tutoriel/index
 
 
-How should I cite NASim?
-------------------------
-
-Please cite NASim in your publications if you use it in your research. Here is an example BibTeX entry:
-
-.. code-block:: bash
-
-    @misc{schwartz2019nasim,
-    title={NASim: NJP},
-    author={Schwartz, Jonathon and Kurniawatti, Hanna},
-    year={2019},
-    howpublished={\url{https://Julpic08.readthedocs.io/}},
-    }
-
-
 
 Indices and tables
 ==================
