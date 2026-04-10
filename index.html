@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Le monde de julpic! &mdash; NASim 0.12.0 documentation</title>
+  <title>Active Directory : un écosystème fragile &mdash; NASim 0.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -63,7 +63,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Le monde de julpic!</li>
+      <li class="breadcrumb-item active">Active Directory : un écosystème fragile</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -73,10 +73,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="le-monde-de-julpic">
-<h1>Le monde de julpic!<a class="headerlink" href="#le-monde-de-julpic" title="Link to this heading"></a></h1>
-<p>Network Attack Simulator (NASim) is a lightweight, high-level network attack simulator written in python. It is designed to be used for rapid testing of autonomous pen-testing agents using reinforcement learning and planning. It is a simulator by definition so does not replicate all details of attacking a real system but it instead aims to capture some of the more salient features of network pen-testing such as the large and changing sizes of the state and action spaces, partial observability and varied network topology.</p>
-<p>The environment is modelled after the <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium/">gymnasium (formerly Open AI gym)</a> interface.</p>
+  <section id="active-directory-un-ecosysteme-fragile">
+<h1>Active Directory : un écosystème fragile<a class="headerlink" href="#active-directory-un-ecosysteme-fragile" title="Link to this heading"></a></h1>
+<p>Active Directory (AD) est au cœur du système d’information : il centralise l’authentification, les droits d’accès et la gestion des ressources. Cette position critique en fait une cible privilégiée.</p>
+<p>Sa complexité et l’interdépendance de ses composants le rendent particulièrement fragile : une mauvaise configuration, un droit mal attribué ou une simple exposition d’information peuvent suffire à compromettre l’ensemble du domaine.</p>
+<p>Maîtriser finement AD, appliquer le principe du moindre privilège et surveiller en continu les accès ne sont donc pas optionnels, mais essentiels pour garantir la sécurité du système.</p>
 </section>
 <section id="gestion-des-droits-utilisateurs">
 <h1>Gestion des droits utilisateurs<a class="headerlink" href="#gestion-des-droits-utilisateurs" title="Link to this heading"></a></h1>
@@ -111,125 +112,6 @@
 <li><p>Même les droits en lecture doivent être contrôlés</p></li>
 <li><p>Les fichiers sensibles doivent être protégés, y compris contre la simple consultation</p></li>
 </ul>
-</section>
-<section id="what-s-new">
-<h2>What’s new<a class="headerlink" href="#what-s-new" title="Link to this heading"></a></h2>
-<section id="version-0-12-0">
-<h3>Version 0.12.0<a class="headerlink" href="#version-0-12-0" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Renamed <cite>NASimEnv.get_minimum_actions -&gt; NASimEnv.get_minumum_hops</cite> to better reflect what it does (thanks &#64;rzvnbr for the suggestion).</p></li>
-</ul>
-</section>
-<section id="version-0-11-0">
-<h3>Version 0.11.0<a class="headerlink" href="#version-0-11-0" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Migrated to <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium/">gymnasium (formerly Open AI gym)</a> fromOpen AI gym (thanks &#64;rzvnbr for the suggestion).</p></li>
-<li><p>Fixed bug with action string representation (thanks &#64;rzvnbr for the bug report)</p></li>
-<li><p>Added “sim to real considerations” explanation document to the docs (thanks &#64;Tudyx for the suggestion)</p></li>
-</ul>
-</section>
-<section id="version-0-10-1">
-<h3>Version 0.10.1<a class="headerlink" href="#version-0-10-1" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Fixed bug for host based actions (thanks &#64;nguyen-thanh20 for the bug report)</p></li>
-</ul>
-</section>
-<section id="version-0-10-0">
-<h3>Version 0.10.0<a class="headerlink" href="#version-0-10-0" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Fixed typos (thanks &#64;francescoluciano)</p></li>
-<li><p>Updates to be compatible with latest version of OpenAI gym API (v0.25) (see <a class="reference external" href="https://www.gymlibrary.ml/content/api/">Open AI gym API docs</a> for details), notable changes include</p>
-<ul>
-<li><p>Updated naming convention when initializing environments using the <code class="docutils literal notranslate"><span class="pre">gym.make</span></code> API (see <a class="reference external" href="https://networkattacksimulator.readthedocs.io/en/latest/tutorials/gym_load.html">gym load docs</a> for details.)</p></li>
-<li><p>Updated reset function to match new gym API (shouldn’t break any implementations using old API)</p></li>
-<li><p>Updated step function to match new gym API. It now returns two bools, the first specifies if terminal/goal state has been reached and the other specifies if the episode is terminated due to the scenario step limit (if any exists) has been reached. This change may break implementations and you may need to specify (or not) when initializing the gym environment using <code class="docutils literal notranslate"><span class="pre">gym.make(env_id,</span> <span class="pre">new_step_api=True)</span></code></p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="version-0-9-1">
-<h3>Version 0.9.1<a class="headerlink" href="#version-0-9-1" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Fixed a few bugs and added some tests (thanks &#64;simonsays1980 for the bug reports)</p></li>
-</ul>
-</section>
-<section id="version-0-9-0">
-<h3>Version 0.9.0<a class="headerlink" href="#version-0-9-0" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>The value of a host is now observed when any level of access is gained on a host. This makes it so that agents can learn to decide whether to invest time in gaining root access on a host or not, depending on the host’s value (thanks &#64;jaromiru for the proposal).</p></li>
-<li><p>Initial observation of reachable hosts now contains the host’s address (thanks &#64;jaromiru).</p></li>
-<li><p>Added some support for custom address space bounds in when using scenario generator (thanks &#64;jaromiru for the suggestion).</p></li>
-</ul>
-</section>
-<section id="version-0-8-0">
-<h3>Version 0.8.0<a class="headerlink" href="#version-0-8-0" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Added option of specifying a ‘value’ for each host when defining a custom network using the .YAML format (thanks &#64;Joe-zsc for the suggestion).</p></li>
-<li><p>Added the ‘small-honeypot’ scenario to included scenarios.</p></li>
-</ul>
-</section>
-<section id="version-0-7-5">
-<h3>Version 0.7.5<a class="headerlink" href="#version-0-7-5" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Added ‘undefined error’ to observation to fix issue with initial and later observations being indistinguishable.</p></li>
-</ul>
-</section>
-<section id="version-0-7-4">
-<h3>Version 0.7.4<a class="headerlink" href="#version-0-7-4" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Fixed issues with incorrect observation of host ‘value’ and ‘discovery_value’. Now, when in partially observable mode, the agent will correctly only observe these values on the step that they are recieved</p></li>
-<li><p>Some other minor code formatting fixes</p></li>
-</ul>
-</section>
-<section id="version-0-7-3">
-<h3>Version 0.7.3<a class="headerlink" href="#version-0-7-3" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Fixed issue with scenario YAML files not being included with PyPi package</p></li>
-<li><p>Added final policy visualisation option to DQN and Q-Learning agents</p></li>
-</ul>
-</section>
-<section id="version-0-7-2">
-<h3>Version 0.7.2<a class="headerlink" href="#version-0-7-2" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Fixed bug with ‘re-registering’ Gym environments when reloading modules</p></li>
-<li><p>Added example implementations of Tabular Q-Learning: <cite>agents/ql_agent.py</cite> and <cite>agents/ql_replay.py</cite></p></li>
-<li><p>Added <cite>Agents</cite> section to docs, along with other minor doc updates</p></li>
-</ul>
-</section>
-<section id="version-0-7-1">
-<h3>Version 0.7.1<a class="headerlink" href="#version-0-7-1" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Added some scripts for running random benchmarks and describing benchmark scenarios</p></li>
-<li><p>Added some more docs (including for creating custom scenarios) and updated other docs</p></li>
-</ul>
-</section>
-<section id="version-0-7">
-<h3>Version 0.7<a class="headerlink" href="#version-0-7" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Implemented host based firewalls</p></li>
-<li><p>Added priviledge escalation</p></li>
-<li><p>Added a demo script, including a pre-trained agent for the ‘tiny’ scenario</p></li>
-<li><p>Fix to upper bound calculation (factored in reward for discovering a host)</p></li>
-</ul>
-</section>
-<section id="version-0-6">
-<h3>Version 0.6<a class="headerlink" href="#version-0-6" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>Implemented compatibility with gym.make()</p></li>
-<li><p>Updated docs for loading and interactive with NASimEnv</p></li>
-<li><p>Added extra functions to nasim.scenarios to make it easier to load scenarios seperately to a NASimEnv</p></li>
-<li><p>Fixed bug to do with class attributes and creating different scenarios in same python session</p></li>
-<li><p>Fixed up bruteforce agent and tests</p></li>
-</ul>
-</section>
-<section id="version-0-5">
-<h3>Version 0.5<a class="headerlink" href="#version-0-5" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>First official release on PyPi</p></li>
-<li><p>Cleaned up dependencies, setup.py, etc and some small fixes</p></li>
-<li><p>First stable version</p></li>
-</ul>
-</section>
 </section>
 <section id="the-docs">
 <h2>The Docs<a class="headerlink" href="#the-docs" title="Link to this heading"></a></h2>
