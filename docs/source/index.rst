@@ -172,6 +172,7 @@ The Docs
    reference/index
    explanations/index
    community/index
+   tutoriel/index
 
 
 How should I cite NASim?
