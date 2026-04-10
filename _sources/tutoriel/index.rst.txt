@@ -1,6 +1,6 @@
-.. _tutorials:
+.. _tutoriel:
 
-Tutorials
+Tutoriel
 =========
 
 .. toctree::
